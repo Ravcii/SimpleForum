@@ -2,8 +2,8 @@
 
 define("DBLOC", "localhost");
 
-define("DBUSER", "ravcii");
+define("DBUSER", "root");
 
-define("DBPASS", "nIiD7W4X1uW6D5RP");
+define("DBPASS", "");
 
-define("DBNAME", "ravcii");
+define("DBNAME", "simpleforum");

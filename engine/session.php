@@ -1,13 +1,15 @@
 <?php
-
-//Set session length - 2 Day's
+//Длинна сессии - 2 дня
 session_set_cookie_params(2*24*60*60);
 ini_set("session.gc_maxlifetime", 2*24*60*60);
 
-//Start session
+//Запускаем сессию
 session_start();
 
-//Update session value's
+/**
+Оставлю этот кусок на всякий случай. Нужен если собираемся собирать такую статистику, как "Последняя авторизация" и с какого айпишника был вход
+
+//Если авторизова
 if($user->isLogged()) {
 	$info = $sql->fetchArray("SELECT `id`, `login`, `password`, `last_ip`, `rank`, `last_online` FROM `users` WHERE `login` = '".$user->getLogin()."'");
 		foreach($info as $key => $value){
@@ -25,3 +27,4 @@ if($user->isLogged()) {
 			$sql->query("UPDATE `users` SET `last_online` = '$time' WHERE `login` = '".$info["login"]."'");
 		}
 }
+**/

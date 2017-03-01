@@ -14,6 +14,3 @@ require_once("session.php");
 
 require_once("classes/user.class.php");
 $user = new user();
-
-require_once("classes/orders.class.php");
-$order = orders::getInstance();
