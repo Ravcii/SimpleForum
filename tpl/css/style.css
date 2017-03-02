@@ -1,47 +1,100 @@
-body{
-	min-width: 900px;
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
 }
 
-.logo{
-	margin: 10px auto;
-	text-align: center;
+a, a:visited{
+    text-decoration: none;
+    color: #FFF;
 }
 
-#message h4{
-	margin: 0;
+li{
+     list-style-type: none;
 }
 
-.user-block{
-	background: #DDD;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
-	padding: 10px;
-	float: right;
-	border: 1px solid #CCC;
+p{
+    font-size: 16px;
 }
 
-.pull-right{
-	float: right;
+html, body {
+    height: 100%;
 }
 
-.form-horizontal .control-label {
-	padding-top: 0;
+body {
+    min-width: 900px;
+    background: url('../img/bg.png') repeat;
 }
 
-.controls textarea{
-	max-width: 650px; 
-	max-height: 300px;
+#main{
+    margin: 64px auto 0 auto;
+    width: 900px;
 }
 
-.input-append{
-	display: block !important;
-}
-.input-append input{
-	text-align: right;
+ul.hr{
+    height: 50px;
+    display: table-row;
 }
 
-.btn-inverse .caret {
-	border-top-color: #FFF !important;
-	border-bottom-color: #FFF !important;
+ul.hr li {
+    display: table-cell; 
+    padding: 10px;
+    vertical-align: middle;
+}
+
+#header_title{
+    background-color: #994e4d;
+    height: 50px;
+    border-radius: 5px 5px 0 0;
+}
+
+#header_title .left{
+    margin-left: 30px;
+}
+
+#header_title .right{
+    margin-right: 30px;
+}
+
+#categories{
+    background-color: white;
+    border-radius: 0 0 5px 5px;
+    padding: 10px 30px;
+}
+
+.category{
+    margin-bottom: 20px;
+}
+
+.category .titles{
+    color: #fff;
+    padding: 10px 10px 11px 10px;
+    font-size: 16px;
+    border-radius: 3px;
+    background: #d66d6b;
+}
+
+.category .titles div{
+    display: inline-block;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.category .titles .title{
+    text-align: left;
+    width: 55%;
+}
+
+
+
+.right{
+    float: right;
+}
+
+.left{
+    float: left;
+}
+
+.clear{
+    clear: both;
 }

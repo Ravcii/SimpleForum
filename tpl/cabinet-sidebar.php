@@ -1,1 +1,0 @@
-<div class="span3">	<div class="well sidebar-nav">		<ul class="nav nav-list">			<li><a href="/cabinet"><i class="icon-home"></i> Главная</a></li>			<li class="divider"></li>			<li><a href="/cabinet/orders"><i class="icon-list"></i> Ваши заказы</a></li>			<li><a href="/cabinet/orders/add"><i class="icon-pencil"></i> Сделать заказ</a></li>		</ul>	</div></div>

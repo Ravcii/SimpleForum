@@ -12,7 +12,7 @@ class template{
         return self::$_instance;
     }
 	
-	private $title = "qb Studio";
+	private $title = _TITLE_;
 	private $template = null;
 
     public function addFile($file){
@@ -48,7 +48,8 @@ class template{
 		$this->template = str_replace("{end}", "<?= } ?>", $this->template);
 		
 		//Файловые репллейсеры
-		$this->replaceFile("{user_block}", "user-panel.php");
+		//Пусть лежит для примера. Удалите как не будет нужен
+		//$this->replaceFile("{user_block}", "user-panel.php");
 		
 		//Another preg Replace's
 		//Я не помню для чего, пока оставим

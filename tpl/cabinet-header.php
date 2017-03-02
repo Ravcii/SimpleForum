@@ -1,1 +1,0 @@
-<div class="container">    <div class="row">		<div class="hero-unit">			{user_block}			<h2>{header_title}</h2>		</div>

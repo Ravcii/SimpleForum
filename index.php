@@ -9,5 +9,3 @@ echo $template->getTemplate();
 if($db->getErrors()) {
 	echo $db->getErrors();
 }
-
-echo "<!-- Written by Ravcii, 2013 -->";
