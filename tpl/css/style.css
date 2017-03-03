@@ -64,28 +64,49 @@ ul.hr li {
 
 .category{
     margin-bottom: 20px;
+    width: 100%;
+    border: none;
+    white-space:nowrap;
+    text-align: center;
 }
 
 .category .titles{
     color: #fff;
-    padding: 10px 10px 11px 10px;
-    font-size: 16px;
-    border-radius: 3px;
+}
+
+.category .titles th{
     background: #d66d6b;
 }
 
-.category .titles div{
-    display: inline-block;
-    text-align: center;
-    padding: 0 10px;
+.category .titles th:first-of-type{
+    border-radius: 5px 0 0 5px;
 }
 
-.category .titles .title{
+.category .titles th:last-of-type{
+    border-radius: 0 5px 5px 0;
+}
+
+.category td, .category th{
+    padding: 10px 15px;
+}
+
+.category td.cat-image{
+    padding: 10px;
+}
+
+.category .name{
+    width: 100%;
     text-align: left;
-    width: 55%;
 }
 
+.category .name p.n{
+    font-size: 16px;
+}
 
+.category .name p.d{
+    font-size: 14px;
+    font-style: italic;
+}
 
 .right{
     float: right;
