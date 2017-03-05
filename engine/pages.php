@@ -24,5 +24,14 @@ switch($_GET["page"]){
 		$template->addFile("header.tpl");
 		$template->addFile("categories.tpl");
 		$template->addFile("footer.tpl");
-		break;
+        break;
+        
+    case "regist":
+    default:
+        $template->addFile("regist.tpl");
+        break;
+    case "author":
+    default:
+        $template->addFile("author.tpl");
+        break;    
 }
