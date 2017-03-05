@@ -5,7 +5,3 @@ require_once("./engine/pages.php");
 $template->parse();
 
 echo $template->getTemplate();
-
-if($db->getErrors()) {
-	echo $db->getErrors();
-}

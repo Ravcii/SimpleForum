@@ -1,17 +1,6 @@
 <?php
 
-class template{
-	private static $_instance;
-    private function __construct(){}
-	private function __clone(){}
-	
-    public static function getInstance() {
-        if ( is_null(self::$_instance) ) {
-            self::$_instance = new self();
-        }
-        return self::$_instance;
-    }
-	
+class Template{
 	private $title = _TITLE_;
 	private $template = null;
 
@@ -35,17 +24,28 @@ class template{
 		$this->template = str_replace($str, $text, $this->template);
 	}
 	
+	public function getTextFromFile($file){
+		$file = "./tpl/".$file;
+		$handle = fopen($file, "r");
+		$text = fread($handle, filesize($file));
+		fclose($handle);
+		
+		return $text;
+	}
+	
 	public function addTitle($title){
 		$this->title = $title . " » " . $this->title;
 	}
 
     public function parse(){
-		global $order, $user;
+		//global $user;
 		
 		//Строковые реплейсеры
 		$this->template = str_replace("{header_title}", $this->title, $this->template);
-		$this->template = str_replace("{isAdmin}", "<?=if( $user->isAdmin() ) { ?>", $this->template);
-		$this->template = str_replace("{end}", "<?= } ?>", $this->template);
+		$this->template = str_replace("{isAdmin}", "<?php if( $user->isAdmin() ) { ?>", $this->template);
+		$this->template = str_replace("{end}", "<?php } ?>", $this->template);
+        
+		$this->template = str_replace("{categories}", Categories::getCategoriesAsHtml(), $this->template);
 		
 		//Файловые репллейсеры
 		//Пусть лежит для примера. Удалите как не будет нужен

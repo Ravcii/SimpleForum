@@ -100,12 +100,16 @@ ul.hr li {
 }
 
 .category .name p.n{
-    font-size: 16px;
+    font-size: 18px;
 }
 
-.category .name p.d{
-    font-size: 14px;
-    font-style: italic;
+footer{
+    margin: 20px 0;
+}
+
+footer p{
+    margin: 0 auto;
+    text-align: center;
 }
 
 .right{
