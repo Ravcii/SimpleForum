@@ -1,0 +1,74 @@
+
+/* Импорт иконок */
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+/* Настройки под иконки */
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
+body {
+	background-color: white;
+	font-size: 24px;
+	line-height: 1.5em;
+}
+
+input {
+	border: none;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.5em;
+	padding: 0;
+}
+
+p {
+	line-height: 1.5em;
+}
+
+#login {
+	margin: 150px auto;
+	padding: 80px;
+	width: 280px;
+	background-color: #ebecf0;
+}
+
+/* Настройки блока с иконками */
+#login form span {
+	background-color: #ffffff;
+	color: #d66d6b;
+	display: block;
+	float: left;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	width: 50px;
+}
+
+/* Размерность полей ввода */
+#login form input {
+	height: 50px;
+	outline:none;
+}
+
+/* Настройки для полей ввода */
+#login form input[type="text"], input[type="password"], input[type="email"] {
+	background-color: white;
+	color: #d66d6b;
+	margin-bottom: 1em;
+	padding: 0 16px;
+	width: 198px;
+}
+
+/* Кнопка регистрации */
+#login form input[type="submit"] {
+	border-radius: 3px;
+	background-color: white;
+	color: #d66d6b;
+	font-weight: bold;
+	margin-bottom: 2em;
+	text-transform: uppercase;
+	cursor:pointer;
+	width: 280px;
+}
+
+
