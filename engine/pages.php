@@ -9,7 +9,20 @@ switch($_GET["page"]){
 		$template->addFile("categories.tpl");
 		$template->addFile("footer.tpl");
         break;
-        
+	case "topic":
+		$template->addTitle("Тема");
+		
+		$template->addFile("header.tpl");
+		$template->addFile("topic.tpl");
+		$template->addFile("footer.tpl");
+		break;
+    case "section":
+        $template->addTitle("Тема");
+
+        $template->addFile("header.tpl");
+        $template->addFile("sections.tpl");
+        $template->addFile("footer.tpl");
+        break;
     case "register":
         $template->addTitle("Регистрация");
         
