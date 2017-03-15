@@ -46,7 +46,9 @@ class Template{
 		$this->template = str_replace("{end}", "<?php } ?>", $this->template);
         
 		$this->template = str_replace("{categories}", Categories::getCategoriesAsHtml(), $this->template);
-		
+        $this->template = str_replace("{load_messages}", Categories::getMessagesAsHtml(), $this->template);
+        $this->template = str_replace("{form_messages}", Categories::getFormMessagesAsHtml(), $this->template);
+        $this->template = str_replace("{messages_users}", Categories::getMessagesUsersAsHtml(), $this->template);
 		//Файловые репллейсеры
 		//Пусть лежит для примера. Удалите как не будет нужен
 		//$this->replaceFile("{user_block}", "user-panel.php");
