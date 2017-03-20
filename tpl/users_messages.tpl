@@ -1,12 +1,12 @@
 <div class="background_message_user">
-    <div class="user_panel">
+    <div class="user_panel left">
         <span id="name">Имя пользователя</span>
         <div class="user_avatar"></div>
         <span id="count_messages">Сообщений: 1000</span>
         <span id="status">Статус: Online</span>
     </div>
-    <span id="date_text">Опубликовано - 15/03/2017</span>
-    <div class="text_messages">
+    <span class="highlight">Опубликовано - 15/03/2017</span>
+    <div class="text_messages right">
         Слой, создаваемый через тег является блочным элементом веб-страницы. Это означает, что по ширине слой занимает
         все доступное пространство и всегда начинается с новой строки. Поэтому ограничение ширины слоев никак не
         приведет к тому, что блоки станут располагаться рядом. Для нашей цели следует воспользоваться стилевым свойством

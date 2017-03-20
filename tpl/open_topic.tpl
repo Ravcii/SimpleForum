@@ -1,9 +1,10 @@
 <div class="topicBackground">
     {messages_users}
-    <span class="text_up_messages">Быстрый ответ:</span>
-    {form_messages}
-    <div class="back_button">
-        <a href="#" class="buttonMessages">Предпросмотр</a>
-        <a href="#" class="buttonMessages">Отправить</a>
+    <div class="answer">
+        <div class="highlight">Быстрый ответ:</div>
+        <div class="enterField"><textarea></textarea></div>
+        <div class="clear"></div>
+        <a href="#" class="buttonSend right">Отправить</a>
+        <div class="clear"></div>
     </div>
 </div>

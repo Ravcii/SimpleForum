@@ -4,4 +4,4 @@ require_once("./engine/pages.php");
 
 $template->parse();
 
-echo $template->getTemplate();
+print $template->getTemplate();

@@ -55,15 +55,6 @@ class Categories
         return $_html;
     }
 
-    public static function getFormMessagesAsHtml()
-    {
-        global $template;
-        $_html = "";
-        $_html .= $template->getTextFromFile("form_messages.tpl");
-
-        return $_html;
-    }
-
     public static function getMessagesUsersAsHtml()
     {
         global $template;

@@ -38,16 +38,16 @@ class Template{
 	}
 
     public function parse(){
-		//global $user;
+		global $user;
 		
 		//Строковые реплейсеры
 		$this->template = str_replace("{header_title}", $this->title, $this->template);
-		$this->template = str_replace("{isAdmin}", "<?php if( $user->isAdmin() ) { ?>", $this->template);
+		$this->template = str_replace("{isLogged}", "<?php if( $user->isLogged() ) { ?>", $this->template);
+		$this->template = str_replace("{else}", "<?php } else { ?>", $this->template);
 		$this->template = str_replace("{end}", "<?php } ?>", $this->template);
         
 		$this->template = str_replace("{categories}", Categories::getCategoriesAsHtml(), $this->template);
         $this->template = str_replace("{load_messages}", Categories::getMessagesAsHtml(), $this->template);
-        $this->template = str_replace("{form_messages}", Categories::getFormMessagesAsHtml(), $this->template);
         $this->template = str_replace("{messages_users}", Categories::getMessagesUsersAsHtml(), $this->template);
 		//Файловые репллейсеры
 		//Пусть лежит для примера. Удалите как не будет нужен
