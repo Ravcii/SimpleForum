@@ -24,19 +24,10 @@
                     <li><a href="/">Наша команда</a></li>
                 </ul>    
             </div>
-            <?php {isLogged} ?>
             <div class="right">
                 <ul class="hr">
                     <li><a href="/">Пользователь</a></li>
                     <li><a href="/">Выход</a></li>
                 </ul>  
             </div>
-            {else}
-            <div class="right">
-                <ul class="hr">
-                    <li><a href="/">Авторизация</a></li>
-                    <li><a href="/">Регистрация</a></li>
-                </ul>  
-            </div>
-            {end}
         </div>

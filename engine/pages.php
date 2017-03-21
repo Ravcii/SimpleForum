@@ -6,21 +6,21 @@ switch($_GET["page"]){
         $template->addTitle("Главная страница");
     
 		$template->addFile("header.tpl");
-		$template->addFile("categories.tpl");
+		$template->addFile("/categories/categories.tpl");
 		$template->addFile("footer.tpl");
         break;
 	case "topic":
 		$template->addTitle("Тема");
 		
 		$template->addFile("header.tpl");
-		$template->addFile("topic.tpl");
+		$template->addFile("/topic/topic.tpl");
 		$template->addFile("footer.tpl");
 		break;
     case "section":
-        $template->addTitle("Тема");
+        $template->addTitle("Раздел");
 
         $template->addFile("header.tpl");
-        $template->addFile("sections.tpl");
+        $template->addFile("/section/sections.tpl");
         $template->addFile("footer.tpl");
         break;
     case "register":

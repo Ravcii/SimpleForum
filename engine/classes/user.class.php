@@ -21,14 +21,12 @@ class User{
 		return $this->sess["auth"];
 	}
 	
-    /*
 	public function isAdmin(){
 		if($this->sess["rank"] >= 10) 
 			return true;
 		else
 			return false;
 	}
-    */
 
 	public function login($login, $pass){
 		global $db;
