@@ -19,8 +19,8 @@ $categories = new Categories();
 require_once("classes/topic.class.php");
 $topic = new Topic();
 
-require_once("classes/sections.class.php");
-$sections = new Sections();
+//require_once("classes/sections.class.php");
+//$sections = new Sections();
 
 require_once("classes/topics.class.php");
 $topics = new Topics();
