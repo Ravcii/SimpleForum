@@ -45,8 +45,8 @@ class Template{
 		$this->template = str_replace("{isAdmin}", "<?php if( $user->isAdmin() ) { ?>", $this->template);
 		$this->template = str_replace("{end}", "<?php } ?>", $this->template);
         
+        //Категории главной страницы
 		$this->template = str_replace("{categories}", Categories::getCategoriesAsHtml(), $this->template);
-
 
 		/* Тема */
 
@@ -58,9 +58,8 @@ class Template{
         $this->template = str_replace("{messages_users}", Topic::getMessagesUsersAsHtml(), $this->template);
 
         /* Раздел */
-
-        $this->template = str_replace("{sections}", Sections::getSectionsAsHtml(), $this->template);
-        $this->template = str_replace("{sections_theme}", Topics::getTopicsAsHtml(), $this->template);
+        //$this->template = str_replace("{sections}", Sections::getSectionsAsHtml(), $this->template);
+        //$this->template = str_replace("{sections_theme}", Topics::getTopicsAsHtml(), $this->template);
 
 		//Файловые репллейсеры
 		//Пусть лежит для примера. Удалите как не будет нужен
