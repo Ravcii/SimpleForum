@@ -24,18 +24,22 @@ switch($_GET["page"]){
         $template->addFile("footer.tpl");
         break;
     case "register":
-        if($_POST["reg"] == "1"){
-            //Сама рега проходит в функции ниже, и на рутерн оно выдаёт сообщение с результатом, которое надо выводить пользователю, но это в TODO.
-            $msg = $user->register($_POST["login"], $_POST["pass"], $_POST["repass"], $_POST["email"]);
+        if($_POST["action"]){
+            $msg = $user->register($_POST["login"], $_POST["password"], $_POST["password"], $_POST["email"]);
+            echo $msg;
         }
     
         $template->addTitle("Регистрация");
-        $template->addFile("register.tpl");
+        $template->addFile("/auth/register.tpl");
         break;
         
     case "login":
+        if($_POST["action"]){
+            $msg = $user->login($_POST["login"], $_POST["password"]);
+            echo $msg;
+        }
+    
         $template->addTitle("Авторизация");
-        
-        $template->addFile("login.tpl");
+        $template->addFile("/auth/login.tpl");
         break;    
 }
