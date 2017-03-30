@@ -48,7 +48,7 @@ class User{
         
 		$pass = md5($pass);
 		if($db->query("INSERT INTO `users` (login, password, email) VALUES ('{$login}', '{$pass}', '{$email}');")) {
-			return "Аккаунт <b>".$login."</b> (".$email.") был зарегистрирован.");
+			return "Аккаунт <b>".$login."</b> (".$email.") был зарегистрирован.";
 		} else {
 			return "Ошибка базы данных. Пожалуйста, покажите ошибку нашему системному администратору. Код ошибки:" . mysql_error();
 		}
