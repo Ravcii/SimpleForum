@@ -247,4 +247,36 @@ a.buttonMessages:active {
 
 }
 
+.category .topics{
+    padding-right: 20px;
+}
+
+.category .answers{
+    padding-right: 50px;
+}
+
+.category .last{
+    padding-right: 50px;
+}
+
+
+a.newTopicButton {
+    display: inline-block;
+    margin-bottom: 10px;
+    background: white;
+    margin-left: 0px;
+    color: #d66d6b;
+    text-decoration: none;
+    padding: .4em 2em;
+    outline: none;
+    border: 1px solid;
+}
+
+a.newTopicButton:hover {
+    background: #ffe9e6;
+}
+
+a.newTopicButton:active {
+    background: white;
+}
 
