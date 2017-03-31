@@ -24,11 +24,26 @@ p {
 	line-height: 1.5em;
 }
 
+#message{
+    margin: 20px auto;
+    background: #ebecf0;
+    padding: 32px;
+    max-width: 450px;
+    display: none;
+    font-size: 22px;
+    border-radius: 5px;
+}
+
+.show{
+    display: block !important;
+}
+
 #login {
 	margin: 100px auto;
 	padding: 25px 50px;
 	background-color: #ebecf0;
     width: 280px;
+    border-radius: 5px;
 }
 
 /* Настройки блока с иконками */

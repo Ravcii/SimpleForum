@@ -3,9 +3,10 @@
         <img src="./tpl/img/category-default.png">
     </td>
     <td class="name">
-        <p class="n">{_NAME}</p>
+        <p class="n">{subcat_name}</p>
     </td>
-    <td class="topics">EZ TODO</td>
-    <td class="answers">HARD TODO</td>
-    <td class="last">EZ TODO</td>
+    <td class="topics">228</td>
+    <td class="answers">1337</td>
+    <td class="last">Привет</td>
     </td>
+</tr>

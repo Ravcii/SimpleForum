@@ -2,10 +2,11 @@
 <html> 
 <head> 
     <meta charset="utf-8"> 
-    <title>Регистрация</title> 
+    <title>{header_title}</title> 
     <link href="/tpl/css/style_auth.css" rel="stylesheet"> 
 </head> 
 <body>
+    <div id="message" class="{show}">{message}</div>
     <div id="login">
         <form action="/login" method="POST">
             <input type="hidden" name="action" value="1" />
@@ -15,7 +16,7 @@
                     type="text"
                     name="login"
                     pattern="^[0-9a-zA-Z_]+$"
-                    title="Логин должен состоять из английских букв и цифр 0-9."
+                    title="Логин должен состоять из английских букв и цифр."
                     placeholder="Имя пользователя" 
                     required
                 />
@@ -25,8 +26,8 @@
                 <input
                     type="password"
                     name="password"
-                    pattern="[0-9a-z_A-Z\?\*\-\_\@\#]"
-                    title="Пароль может состоять из английских букв, цифр и символов \"?*-_@#\"."
+                    pattern="[0-9a-z_A-Za-яA-ЯёЁ]+"
+                    title="Пароль должен состоять из цифр и русских и английских букв."
                     placeholder="Пароль"
                     required
                 />
