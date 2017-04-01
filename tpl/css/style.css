@@ -26,6 +26,18 @@ body {
     background: url('../img/bg.png') repeat;
 }
 
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+.clear {
+    clear: both;
+}
+
 #main {
     margin: 64px auto 0 auto;
     width: 900px;
@@ -56,10 +68,10 @@ ul.hr li {
     margin-right: 30px;
 }
 
-#categories {
+#content {
     background-color: white;
     border-radius: 0 0 5px 5px;
-    padding: 10px 30px;
+    padding: 20px 30px;
 }
 
 .category {
@@ -68,6 +80,10 @@ ul.hr li {
     border: none;
     white-space: nowrap;
     text-align: center;
+}
+
+.category:last-of-type{
+    margin-bottom: 0;
 }
 
 .category .titles {
@@ -98,30 +114,13 @@ ul.hr li {
     text-align: left;
 }
 
+.category .topics, .category .answers, .category .last{
+    padding: 0px 15px;
+}
+
 .category .name p.n {
     font-size: 18px;
     color: black;
-}
-
-footer {
-    margin: 20px 0;
-}
-
-footer p {
-    margin: 0 auto;
-    text-align: center;
-}
-
-.right {
-    float: right;
-}
-
-.left {
-    float: left;
-}
-
-.clear {
-    clear: both;
 }
 
 .topic {
@@ -138,113 +137,99 @@ footer p {
     padding-left: 20px;
 }
 
-/* Блок для всей темы */
 .topicBackground {
-    margin-top: 5px;
-    padding-top: 20px;
-    border-radius: 5px 5px 5px 5px;
-    background: #f5f5f5;
-    width: 100%;
-}
-
-.form_input {
-    margin-left: 20px;
     margin-top: 10px;
-    margin-bottom: 10px;
-    width: 770px;
-    height: 15px;
-    padding: 5px 20px 100px 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background: #f5f5f5;
 }
 
-.back_button {
+.user_avatar {
+    width: 100px;
+    height: 100px;
+    background: #d66d6b;
+    display: inline-block;
+}
+
+.highlighted {
+    color: #994e4d;
+    display: inline;
+    margin-left: 10px;
+}
+
+.user_panel{
+    width: 150px;
+    text-align: center;
+}
+
+.user_panel a{
+    color: #000;
+}
+.user_panel a span{
+    display: block;
+    font-size: 18px;
+}
+
+.text_messages {
+    padding: 10px;
+    width: 630px;
+}
+
+.background_message_user {
+    background: white;
+    padding:10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    min-height: 170px;
+}
+
+.background_message_user:last-of-type{
+    margin-bottom: 0 !important;
+}
+
+
+.fast_answer{
+    padding: 0 10px;
+}
+
+.fast_answer .highlighted{
+    margin: 0;
+}
+
+.fast_answer .form_input {
+    margin: 10px 0;
+}
+
+.fast_answer .form_input textarea{
+    width: 100%;
+    border: 1px #CCC solid;
+    resize: none;
+}
+
+.fast_answer .back_button {
     margin-left: 515px;
 }
 
-a.buttonMessages {
+.fast_answer a.buttonMessages {
     display: inline-block;
-    margin-bottom: 10px;
     background: #d66d6b;
     margin-left: 10px;
     color: white;
     text-decoration: none;
-    padding: .2em 2em;
+    padding: 5px 15px;
     outline: none;
-    border: 1px solid;
+    border-radius: 3px;
 }
 
-a.buttonMessages:hover {
+.fast_answer  a.buttonMessages:hover {
     background: #ff8f8f;
 }
 
-a.buttonMessages:active {
-    background: white;
+footer {
+    margin: 20px 0;
 }
 
-/* Текст - "Быстрое сообщение" */
-.text_up_messages {
-    color: #994e4d;
-    margin-left: 20px;
+footer p {
+    margin: 0 auto;
+    text-align: center;
 }
-
-.user_avatar {
-    margin-left: 25px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    width: 100px;
-    height: 100px;
-    background: #d66d6b;
-}
-
-#name {
-    margin-left: 20px;
-}
-
-#count_messages {
-    margin-left: 20px;
-}
-
-#status {
-    margin-left: 30px;
-}
-
-#date_text {
-    margin-left: 5px;
-    color: #994e4d;
-}
-
-/* Блок с информации об авторе сообщения */
-.user_panel {
-    background-color: white;
-    padding: 5px;
-    float: left;
-    width: 150px;
-    min-height: 170px;
-}
-
-/* Блок с сообщением пользователя */
-.text_messages {
-    background-color: white;
-    padding-top: 10px;
-    padding-bottom: 20px;
-    padding-left: 5px;
-    width: 640px;
-    min-height: 170px;
-    float: left;
-}
-
-.clear {
-    clear: left; /* Отмена обтекания */
-}
-
-/* Задний фон сообщения пользователя */
-.background_message_user {
-    background: white;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width: 820px;
-    margin-bottom: 20px;
-    margin-left: 10px;
-
-}
-
-

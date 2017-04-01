@@ -1,7 +1,6 @@
 <?php
 
-class Sections
-{
+class Sections {
     public static function getSectionsAsArray()
     {
         global $db;

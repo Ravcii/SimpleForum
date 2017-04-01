@@ -2,10 +2,11 @@
 <html> 
 <head> 
     <meta charset="utf-8"> 
-    <title>Регистрация</title> 
+    <title>{header_title}</title> 
     <link href="/tpl/css/style_auth.css" rel="stylesheet"> 
 </head> 
 <body>
+    <div id="message" class="{show}">{message}</div>
     <div id="login">
         <form action="/register" method="POST">
             <input type="hidden" name="action" value="1" />
@@ -36,8 +37,8 @@
                 <input
                     type="password"
                     name="password"
-                    pattern="[0-9a-z_A-Z\?\*\-\_\@\#]"
-                    title="Пароль может состоять из английских букв, цифр и символов \"?*-_@#\"."
+                    pattern="[0-9a-z_A-Za-яA-ЯёЁ]"
+                    title="Пароль должен состоять из цифр и русских и английских букв."
                     placeholder="Пароль"
                     required
                 />
@@ -47,8 +48,8 @@
                 <input
                     type="password"
                     name="repassword"
-                    pattern="[0-9a-z_A-Z\?\*\-\_\@\#]"
-                    title="Пароль может состоять из английских букв, цифр и символов \"?*-_@#\"."
+                    pattern="[0-9a-z_A-Za-яA-ЯёЁ]"
+                    title="Пароль должен состоять из цифр и русских и английских букв."
                     placeholder="Повторите пароль"
                     required
                 />

@@ -1,3 +1,1 @@
-<div id="categories">
-    {categories}
-</div>
+{categories}
