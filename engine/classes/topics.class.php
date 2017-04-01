@@ -1,7 +1,6 @@
 <?php
 
-class Topics
-{
+class Topics {
     public static function getTopicsAsArray()
     {
         global $db;
