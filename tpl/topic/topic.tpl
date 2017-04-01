@@ -3,6 +3,8 @@
 </div>
 <div class="topicBackground">
     {user_messages}
+    <div class="pagination"><a href="" style="color: black">1</a></div>
+    <div class="clear-fix"></div>
     <div class="fast_answer">
         <span class="highlighted">Быстрый ответ:</span>
         <div class="form_input">

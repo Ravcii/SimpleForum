@@ -1,5 +1,5 @@
 <div id="categories">
     {sections}
-    <button class = "new_topic_button"> Кнопка создания темы </button>
+    <a href="#" class="newTopicButton">Создание темы</a>
     {sections_theme}
 </div>
