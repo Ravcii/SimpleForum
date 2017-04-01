@@ -1,6 +1,4 @@
 RewriteEngine on
-	RewriteRule cabinet/admin /?page=admin [L]
-	RewriteRule cabinet/settings /?page=settings [L]
-	RewriteRule cabinet/orders/add /?page=orders-add [L]
-	RewriteRule cabinet/orders /?page=orders [L]
-	RewriteRule cabinet /?page=cabinet [L]
+	RewriteRule ^register$ /?page=register [L]
+	RewriteRule ^login$ /?page=login [L]
+    RewriteRule ^topic\.id\=(.*)$ /?page=topic&id=$1 [L]
