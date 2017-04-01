@@ -142,6 +142,7 @@ ul.hr li {
     padding: 10px;
     border-radius: 5px;
     background: #f5f5f5;
+<<<<<<< HEAD
 }
 
 .user_avatar {
@@ -233,3 +234,117 @@ footer p {
     margin: 0 auto;
     text-align: center;
 }
+=======
+}
+
+.user_avatar {
+    width: 100px;
+    height: 100px;
+    background: #d66d6b;
+    display: inline-block;
+}
+
+.highlighted {
+    color: #994e4d;
+    display: inline;
+    margin-left: 10px;
+}
+
+.user_panel{
+    width: 150px;
+    text-align: center;
+}
+
+.user_panel a{
+    color: #000;
+}
+.user_panel a span{
+    display: block;
+    font-size: 18px;
+}
+
+.text_messages {
+    padding: 10px;
+    width: 630px;
+}
+
+.background_message_user {
+    background: white;
+    padding:10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    min-height: 170px;
+}
+
+.background_message_user:last-of-type{
+    margin-bottom: 0 !important;
+}
+
+
+.fast_answer{
+    padding: 0 10px;
+}
+
+.fast_answer .highlighted{
+    margin: 0;
+}
+
+.fast_answer .form_input {
+    margin: 10px 0;
+}
+
+.fast_answer .form_input textarea{
+    width: 100%;
+    border: 1px #CCC solid;
+    resize: none;
+}
+
+.fast_answer .back_button {
+    margin-left: 515px;
+}
+
+.fast_answer a.buttonMessages {
+    display: inline-block;
+    background: #d66d6b;
+    margin-left: 10px;
+    color: white;
+    text-decoration: none;
+    padding: 5px 15px;
+    outline: none;
+    border-radius: 3px;
+}
+
+.fast_answer  a.buttonMessages:hover {
+    background: #ff8f8f;
+}
+
+footer {
+    margin: 20px 0;
+}
+
+footer p {
+    margin: 0 auto;
+    text-align: center;
+}
+
+a.massage_id {
+    color: #d66d6b;
+    float: right;
+    font-size: 12px;
+}
+
+.pagination{
+    float: right;
+    padding-right: 3px;
+    color: #000;
+    text-decoration: underline;
+    font-size: 13px;
+    font-family: Georgia, sans-serif;
+}
+
+.clear-fix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+>>>>>>> origin/Artur

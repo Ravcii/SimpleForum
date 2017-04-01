@@ -35,7 +35,14 @@ switch($_GET["page"]){
         break;
         
     case "register":
+        if($_POST["reg"] == "1"){
+            //Сама рега проходит в функции ниже, и на рутерн оно выдаёт сообщение с результатом, которое надо выводить пользователю, но это в TODO.
+            $msg = $user->register($_POST["login"], $_POST["pass"], $_POST["repass"], $_POST["email"]);
+
+        }
+
         $template->addTitle("Регистрация");
+<<<<<<< HEAD
         $template->addFile("/auth/register.tpl");
     
         if($_POST["action"]){
@@ -43,9 +50,12 @@ switch($_GET["page"]){
             $template->replaceString("{message}", $msg);
             $template->replaceString("{show}", "show");
         }
+=======
+        $template->addFile("register.tpl");
+>>>>>>> origin/Artur
         break;
-        
     case "login":
+<<<<<<< HEAD
     
         $template->addTitle("Авторизация");
         $template->addFile("/auth/login.tpl");
@@ -55,6 +65,16 @@ switch($_GET["page"]){
             $template->replaceString("{message}", $msg);
             $template->replaceString("{show}", "show");
         }
+=======
+        if($_POST["auth"] == "1"){
+            $msg = $user->login($_POST["login"], $_POST["pass"]);
+        }
+        $_POST["login"];
+        $_POST["pass"];
+
+        $template->addTitle("Авторизация");
+        $template->addFile("login.tpl");
+>>>>>>> origin/Artur
         break;    
 }
 
