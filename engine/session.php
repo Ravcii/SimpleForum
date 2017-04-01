@@ -3,6 +3,9 @@
 session_set_cookie_params(2*24*60*60);
 ini_set("session.gc_maxlifetime", 2*24*60*60);
 
+//Соме сесурити
+session_name("adblock");
+
 //Запускаем сессию
 session_start();
 

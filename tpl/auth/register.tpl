@@ -37,7 +37,7 @@
                 <input
                     type="password"
                     name="password"
-                    pattern="[0-9a-z_A-Za-яA-ЯёЁ]"
+                    pattern="^[0-9a-z_A-Za-яA-ЯёЁ]+$"
                     title="Пароль должен состоять из цифр и русских и английских букв."
                     placeholder="Пароль"
                     required
@@ -48,7 +48,7 @@
                 <input
                     type="password"
                     name="repassword"
-                    pattern="[0-9a-z_A-Za-яA-ЯёЁ]"
+                    pattern="^[0-9a-z_A-Za-яA-ЯёЁ]+$"
                     title="Пароль должен состоять из цифр и русских и английских букв."
                     placeholder="Повторите пароль"
                     required

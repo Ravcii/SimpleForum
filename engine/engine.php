@@ -11,8 +11,6 @@ $db->set_charset("utf8");
 require_once("session.php");
 
 require_once("classes/user.class.php");
-$user = new User();
-
 require_once("classes/categories.class.php");
 require_once("classes/topic.class.php");
 //require_once("classes/sections.class.php");
