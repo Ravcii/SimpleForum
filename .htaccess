@@ -1,8 +1,8 @@
 AddType application/x-httpd-php .tpl
 
 RewriteEngine on
-	RewriteRule ^register$ /?page=register [L]
-	RewriteRule ^login$ /?page=login [L]
+    RewriteRule ^register$ /?page=register [L]
+    RewriteRule ^login$ /?page=login [L]
     RewriteRule ^logout$ /?page=logout [L]
     RewriteRule ^topic\.id\=(.*)$ /?page=topic&id=$1 [L]
     RewriteRule ^section\.id\=(.*)$ /?page=section&id=$1 [L]
