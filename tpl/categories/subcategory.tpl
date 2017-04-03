@@ -3,10 +3,10 @@
         <img src="./tpl/img/category-default.png">
     </td>
     <td class="name">
-        <p class="n">{subcat_name}</p>
+        <a href="/section.id={subcat_id}" class="n">{subcat_name}</a>
     </td>
-    <td class="topics">228</td>
-    <td class="answers">1337</td>
-    <td class="last">Привет</td>
+    <td class="topics">0</td>
+    <td class="answers">0</td>
+    <td class="last">.</td>
     </td>
 </tr>

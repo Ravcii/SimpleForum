@@ -31,6 +31,7 @@ class Categories {
             $sub_html = "";
             foreach ($cat["subs"] as $sub) {
                 $sub_html_t = $template->getTextFromFile("/categories/subcategory.tpl");
+                $sub_html_t = str_replace("{subcat_id}", $sub["id"], $sub_html_t);
                 $sub_html_t = str_replace("{subcat_name}", $sub["name"], $sub_html_t);
                 $sub_html .= $sub_html_t;
             }

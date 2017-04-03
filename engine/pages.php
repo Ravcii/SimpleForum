@@ -1,6 +1,8 @@
 <?php
 //Делаем переключатель.
 switch($_GET["page"]){
+    
+    //Главная страница
 	case "index":
 	default:
         $template->addTitle("Главная страница");
@@ -12,6 +14,21 @@ switch($_GET["page"]){
         $template->replaceString("{categories}", Categories::getCategoriesAsHtml());
         break;
         
+    //Страница секции (Выбор темы либо раздела)
+    case "section":
+        $id = $db->real_escape_string($_GET["id"]);
+    
+        $template->addTitle("Раздел");
+
+        $template->addFile("header.tpl");
+        $template->addFile("/section/section.tpl");
+        $template->addFile("footer.tpl");
+        
+        $template->replaceString("{sub_categories}", Section::getSubCategoriesAsHtml($id));
+        $template->replaceString("{topics}", Section::getTopicsAsHtml($id));
+        break;
+        
+    //Страница с темой
 	case "topic":
         $id = $db->real_escape_string($_GET["id"]);
     
@@ -23,17 +40,9 @@ switch($_GET["page"]){
         
         $template->replaceString("{topic_title}", Topic::getTitle($id));
         $template->replaceString("{user_messages}", Topic::getUserMessagesAsHtml($id));
-        
 		break;
         
-    case "section":
-        $template->addTitle("Раздел");
-
-        $template->addFile("header.tpl");
-        $template->addFile("/section/sections.tpl");
-        $template->addFile("footer.tpl");
-        break;
-        
+    //Регистрация
     case "register":
         if($_SESSION["auth"]){
             header("Location: /");
@@ -48,7 +57,8 @@ switch($_GET["page"]){
             $template->replaceString("{show}", "show");
         }
         break;
-        
+     
+    //Авторизация
     case "login":
         if($_SESSION["auth"]){
             header("Location: /");
@@ -77,17 +87,3 @@ $template->replaceString("{else}", "<?php } else { ?>");
 $template->replaceString("{end}", "<?php } ?>");
 
 $template->replacePregString("#\\{user\\[(.*?)\\]\\}#ies", "\$_SESSION['\\1']");
-        
- /*       
-        /* Раздел 
-        //$this->template = str_replace("{sections}", Sections::getSectionsAsHtml(), $this->template);
-        //$this->template = str_replace("{sections_theme}", Topics::getTopicsAsHtml(), $this->template);
-
-		//Файловые репллейсеры
-		//Пусть лежит для примера. Удалите как не будет нужен
-		//$this->replaceFile("{user_block}", "user-panel.php");
-		
-		//Another preg Replace's
-		//Я не помню для чего, пока оставим
-		//$this->template = preg_replace("#\\{user\\[(.*?)\\]\\}#ies", "\$_SESSION['\\1']", $this->template);
-*/
