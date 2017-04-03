@@ -4,9 +4,7 @@ class Section {
     
     public static function getTitle($id){
         global $db;
-        
         $title = $db->query("SELECT `name` FROM `categories` WHERE `id` = '{$id}';")->fetch_assoc();
-        
         return $title["name"];
     }
 
@@ -15,10 +13,8 @@ class Section {
         global $db;
 
         $result = array();
-
-        $cat = $db->query("SELECT `id`, `name` FROM `categories` WHERE `parent` = '{$parentId}';");
-        while ($row = $cat->fetch_assoc()) {
-
+        $subCategories = $db->query("SELECT `id`, `name` FROM `categories` WHERE `parent` = '{$parentId}';");
+        while ($row = $subCategories->fetch_assoc()) {
             $result[] = $row;
         }
 
@@ -30,23 +26,22 @@ class Section {
         global $template;
         
         $subCats = Section::getSubCategoriesAsArray($parentId);
-        
-        var_dump($subCats);
-        
         if(empty($subCats)) return "";
 
-        $_html = "";
+        $returnHtml = $template->getTextFromFile("/section/categories_placer.tpl");
+        $categoriesHtml = "";
         foreach ($subCats as $cat) {
-            $cat_html = $template->getTextFromFile("/section/sub_category.tpl");
+            $categoryHtml = $template->getTextFromFile("/section/category.tpl");
 
-            $cat_html = str_replace("{_ID}", $cat["id"], $cat_html);
-            $cat_html = str_replace("{_NAME}", $cat["name"], $cat_html);
+            $categoryHtml = str_replace("{cat_id}", $cat["id"], $categoryHtml);
+            $categoryHtml = str_replace("{cat_name}", $cat["name"], $categoryHtml);
 
-
-            $_html .= $cat_html;
+            $categoriesHtml .= $categoryHtml;
         }
+        
+        $returnHtml = str_replace("{categories}", $categoriesHtml, $returnHtml);
 
-        return $_html;
+        return $returnHtml;
     }
 
     public static function getTopicsAsArray($parentId)
@@ -55,8 +50,8 @@ class Section {
 
         $result = array();
 
-        $cat = $db->query("SELECT `id`, `title` FROM `topics` WHERE `parent` = '{$parentId}';");
-        while ($row = $cat->fetch_assoc()) {
+        $topics = $db->query("SELECT `id`, `title` FROM `topics` WHERE `parent` = '{$parentId}';");
+        while ($row = $topics->fetch_assoc()) {
             $result[] = $row;
         }
 
@@ -66,18 +61,23 @@ class Section {
     public static function getTopicsAsHtml($parentId)
     {
         global $template;
+        
+        $topics = Section::getTopicsAsArray($parentId);
+        if(empty($topics)) return "";
 
-        $_html = "";
-        foreach (Section::getTopicsAsArray($parentId) as $cat) {
-            $cat_html = $template->getTextFromFile("/section/sub_topics.tpl");
+        $returnHtml = $template->getTextFromFile("/section/topics_placer.tpl");
+        $topicsHtml = "";
+        foreach ($topics as $topic) {
+            $topicHtml = $template->getTextFromFile("/section/topic.tpl");
 
-            $cat_html = str_replace("{_ID}", $cat["id"], $cat_html);
-            $cat_html = str_replace("{_NAME}", $cat["title"], $cat_html);
+            $topicHtml = str_replace("{topic_id}", $topic["id"], $topicHtml);
+            $topicHtml = str_replace("{topic_name}", $topic["title"], $topicHtml);
 
-
-            $_html .= $cat_html;
+            $topicsHtml .= $topicHtml;
         }
+        
+        $returnHtml = str_replace("{topics}", $topicsHtml, $returnHtml);
 
-        return $_html;
+        return $returnHtml;
     }
 }

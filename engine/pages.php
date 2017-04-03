@@ -17,28 +17,41 @@ switch($_GET["page"]){
     //Страница секции (Выбор темы либо раздела)
     case "section":
         $id = $db->real_escape_string($_GET["id"]);
+        $sectionTitle = Section::getTitle($id);
     
-        $template->addTitle("Раздел");
+        $template->addTitle($sectionTitle);
 
         $template->addFile("header.tpl");
         $template->addFile("/section/section.tpl");
         $template->addFile("footer.tpl");
         
-        $template->replaceString("{sub_categories}", Section::getSubCategoriesAsHtml($id));
-        $template->replaceString("{topics}", Section::getTopicsAsHtml($id));
+        $subCatHtml = Section::getSubCategoriesAsHtml($id);
+        if($subCatHtml != ""){
+            $template->replaceString("{categories_placer}", $subCatHtml);
+        } else {
+            $template->replaceString("{categories_placer}", "");
+        }
+        
+        $topicsHtml = Section::getTopicsAsHtml($id);
+        if($topicsHtml != ""){
+            $template->replaceString("{topics_placer}", $topicsHtml);
+        } else {
+            $template->replaceString("{topics_placer}", "");
+        }
         break;
         
     //Страница с темой
 	case "topic":
         $id = $db->real_escape_string($_GET["id"]);
+        $topicTitle = Topic::getTitle($id);
     
-		$template->addTitle("Тема");
+		$template->addTitle($topicTitle);
 		
 		$template->addFile("header.tpl");
 		$template->addFile("/topic/topic.tpl");
 		$template->addFile("footer.tpl");
         
-        $template->replaceString("{topic_title}", Topic::getTitle($id));
+        $template->replaceString("{topic_title}", $topicTitle);
         $template->replaceString("{user_messages}", Topic::getUserMessagesAsHtml($id));
 		break;
         
