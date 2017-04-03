@@ -1,5 +1,5 @@
 		</div>
-        <footer class="container">
+        <footer>
 			<p>&copy; DCP Team</p>
 		</footer>
 	</div>

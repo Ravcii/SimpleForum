@@ -2,4 +2,6 @@
 require_once("./engine/engine.php");
 require_once("./engine/pages.php");
 
-echo $template->getTemplate();
+//Оставим, как память о мега-костыле.
+//echo $template->getTemplate();
+eval(' ?>'.$template->getTemplate());

@@ -18,6 +18,10 @@ class Template {
     public function replaceString($find, $replace){
         $this->template = str_replace($find, $replace, $this->template);
     }
+    
+    public function replacePregString($find, $replace){
+        $this->template = preg_replace($find, $replace, $this->template);
+    }
 	
 	public function replaceFile($str, $file){
 		$file = "./tpl/".$file;

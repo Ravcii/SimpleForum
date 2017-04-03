@@ -24,8 +24,13 @@
             </div>
             <div class="right">
                 <ul class="hr">
-                    <li><a href="/login">Авторизация</a></li>
-                    <li><a href="/register">Регистрация</a></li>
+                    {ifLogged}
+                        <li><a href="#">{user[login]}</a></li>
+                        <li><a href="/logout">Выход</a></li>
+                    {else}
+                        <li><a href="/login">Авторизация</a></li>
+                        <li><a href="/register">Регистрация</a></li>
+                    {end}
                 </ul>  
             </div>
         </div>

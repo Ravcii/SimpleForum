@@ -1,9 +1,9 @@
 <tr>
     <td class="cat-image">
-        <img src="./tpl/img/category-default.png">
+        <img src="./tpl/img/topics-default.png">
     </td>
     <td class="name">
-        <a href="/section.id={subcat_id}" class="n">{subcat_name}</a>
+        <a href="/topic.id={topic_id}" class="n">{topic_name}</a>
     </td>
     <td class="topics">0</td>
     <td class="answers">0</td>
