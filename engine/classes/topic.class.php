@@ -1,6 +1,7 @@
 <?php
 
 class Topic {
+    
     public static function getTitle($id){
         global $db;
         

@@ -118,7 +118,7 @@ ul.hr li {
     padding: 0px 15px;
 }
 
-.category .name p.n {
+.category .name a.n {
     font-size: 18px;
     color: black;
 }
