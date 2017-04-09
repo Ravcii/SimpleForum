@@ -6,7 +6,7 @@
 
 a, a:visited {
     text-decoration: none;
-    color: #FFF;
+    /*color: #FFF;*/
 }
 
 li {
@@ -232,4 +232,24 @@ footer {
 footer p {
     margin: 0 auto;
     text-align: center;
+}
+
+.new_topic_button{
+    display: inline-block;
+    color: #d66d6b;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    user-select: none;
+    padding: .4em 2em;
+    outline: none;
+    border: 2px solid;
+    border-radius: 1px;
+    transition: 0.2s;
+}
+
+a.new_topic_button:active { background: #d66d6b; }
+
+.header_button{
+    color: #fff;
 }

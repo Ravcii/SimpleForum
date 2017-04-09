@@ -18,6 +18,18 @@ class Categories {
         return $result;
     }
 
+    public static function getCounterViewCategories($id){
+        global $db;
+
+        $view_categories = $db->query("SELECT `categories_counter_view` FROM `categories` WHERE `id` = '{$id}';")->fetch_assoc();
+
+        $view_topic['counter_view'] = $view_categories['counter_view'] + 1;
+
+        $db->query("UPDATE topics  SET counter_view = '{$view_topic['counter_view']}' WHERE id = '{$id}';");
+
+        return  $view_topic['counter_view'];
+
+    }
     public static function getCategoriesAsHtml() {
         global $template;
 

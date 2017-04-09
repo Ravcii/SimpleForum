@@ -50,19 +50,32 @@ class Section {
 
         $result = array();
 
-        $topics = $db->query("SELECT `id`, `title` FROM `topics` WHERE `parent` = '{$parentId}';");
+        $topics = $db->query("SELECT `id`, `title`, `counter_messages` ,`counter_view` FROM `topics` WHERE `parent` = '{$parentId}';");
         while ($row = $topics->fetch_assoc()) {
             $result[] = $row;
         }
 
+
         return $result;
     }
 
+    public static function  getLastMessagesUser($id){
+        global $db;
+
+        $all_messages = $db->query("SELECT `id`, `uid` FROM `messages` WHERE `tid` = '{$id}';");
+
+        while ($row = $all_messages->fetch_assoc()) {
+            $result[] = $row;
+        }
+
+        echo $result;
+    }
     public static function getTopicsAsHtml($parentId)
     {
         global $template;
-        
+
         $topics = Section::getTopicsAsArray($parentId);
+
         if(empty($topics)) return "";
 
         $returnHtml = $template->getTextFromFile("/section/topics_placer.tpl");
@@ -72,6 +85,9 @@ class Section {
 
             $topicHtml = str_replace("{topic_id}", $topic["id"], $topicHtml);
             $topicHtml = str_replace("{topic_name}", $topic["title"], $topicHtml);
+            $topicHtml = str_replace("{counter_view}", $topic["counter_view"], $topicHtml);
+            $topicHtml = str_replace("{counter_messages}", $topic["counter_messages"], $topicHtml);
+            $topicHtml = str_replace("{counter_messages}", $topic["counter_messages"], $topicHtml);
 
             $topicsHtml .= $topicHtml;
         }
