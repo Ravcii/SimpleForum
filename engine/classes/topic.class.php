@@ -52,4 +52,42 @@ class Topic {
 
         return $_html;
     }
+    
+    public static function sendAnswer($tid, $uid, $text){
+        global $db;
+        
+        if($tid <= 0 || $uid <= 0)
+            return "Авторизуйтесь!";
+        
+        //TODO: Сделать прооверки на существование темы, юзера.
+        
+        $text = $db->real_escape_string($text);
+        $tid = $db->real_escape_string($tid);
+        $uid = $db->real_escape_string($uid);
+        
+        if($db->query("INSERT INTO `messages` VALUES (null, '{$uid}', '{$tid}', '{$text}', NOW());")){
+            return "Ваше сообщение отправлено!";
+        } else {
+            return "Произошло ошибка, сообщите системноу администратору.";
+        }
+    }
+    
+    public static function createTopic($parent, $title, $text, $uid){
+        global $db;
+        
+        if($parent <= 0 || $uid <= 0)
+            return "Авторизуйтесь!";
+        
+        //TODO: Сделать прооверки на существование темы, юзера.
+        
+        $text = $db->real_escape_string($text);
+        $tid = $db->real_escape_string($tid);
+        $uid = $db->real_escape_string($uid);
+        
+        if($db->query("INSERT INTO `messages` VALUES (null, '{$uid}', '{$tid}', '{$text}', NOW());")){
+            return "Ваше сообщение отправлено!";
+        } else {
+            return "Произошло ошибка, сообщите системноу администратору.";
+        }
+    }
 }
