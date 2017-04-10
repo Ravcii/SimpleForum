@@ -198,30 +198,44 @@ ul.hr li {
 
 .fast_answer .form_input {
     margin: 10px 0;
+    border: 1px #CCC solid;
+    padding: 10px 15px;
+    background: #FFF;
 }
 
 .fast_answer .form_input textarea{
     width: 100%;
-    border: 1px #CCC solid;
+    border: 0;
     resize: none;
 }
 
-.fast_answer .back_button {
-    margin-left: 515px;
+.fast_answer #message {
+    border-radius: 3px;
+    margin: 10px 0;
+    display: none;
+    border: 1px solid #d66d6b;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-.fast_answer a.buttonMessages {
+.fast_answer #message.show {
+    display: block;
+}
+
+.fast_answer .buttonMessages {
     display: inline-block;
     background: #d66d6b;
     margin-left: 10px;
     color: white;
     text-decoration: none;
-    padding: 5px 15px;
+    padding: 7px 15px;
     outline: none;
     border-radius: 3px;
+    border: 0;
 }
 
-.fast_answer  a.buttonMessages:hover {
+.fast_answer .buttonMessages:hover {
+    cursor: pointer;
     background: #ff8f8f;
 }
 

@@ -51,6 +51,34 @@ switch($_GET["page"]){
 		$template->addFile("/topic/topic.tpl");
 		$template->addFile("footer.tpl");
         
+        if($_POST["action"]){
+            $msg = Topic::sendAnswer($id, $_SESSION["id"], $_POST["text"]);
+            $template->replaceString("{message}", $msg);
+            $template->replaceString("{show}", "show");
+        }
+        
+        $template->replaceString("{topic_id}", $id);
+        $template->replaceString("{topic_title}", $topicTitle);
+        $template->replaceString("{user_messages}", Topic::getUserMessagesAsHtml($id));
+		break;
+        
+    //Страница с созданием темы
+	case "new_topic":
+        $id = $db->real_escape_string($_GET["parent_id"]);
+        $sectionTitle = Section::getTitle($id);
+    
+		$template->addTitle($sectionTitle);
+		$template->addTitle("Новая тема");
+		
+		$template->addFile("header.tpl");
+		$template->addFile("/new_topic/new_topic.tpl");
+		$template->addFile("footer.tpl");
+        
+        if($_POST["action"]){
+            $msg = Topic::createTopic($id, $_POST["title"], $_POST["text"], $_SESSION["id"]);
+        }
+        
+        $template->replaceString("{topic_id}", $id);
         $template->replaceString("{topic_title}", $topicTitle);
         $template->replaceString("{user_messages}", Topic::getUserMessagesAsHtml($id));
 		break;

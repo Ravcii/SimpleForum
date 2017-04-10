@@ -17,9 +17,7 @@
         <div id="header_title">
             <div class="left">
                 <ul class="hr">
-                    <li><a href="/">Форум</a></li>
-                    <li><a href="/">Пользователи</a></li>
-                    <li><a href="/">Наша команда</a></li>
+                    <li><a href="/">Главная страница</a></li>
                 </ul>    
             </div>
             <div class="right">
