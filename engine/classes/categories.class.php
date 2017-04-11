@@ -8,7 +8,7 @@ class Categories {
 
         $cat = $db->query("SELECT `id`, `name` FROM `categories` WHERE `parent` IS NULL;");
         while ($row = $cat->fetch_assoc()) {
-            $subcat = $db->query("SELECT `id`, `name` FROM `categories` WHERE `parent` = '" . $row["id"] . "';");
+            $subcat = $db->query("SELECT `id`, `name`, `categories_counter_messages` FROM `categories` WHERE `parent` = '" . $row["id"] . "';");
             while ($subrow = $subcat->fetch_assoc()) {
                 $row["subs"][] = $subrow;
             }
@@ -45,6 +45,7 @@ class Categories {
                 $sub_html_t = $template->getTextFromFile("/categories/subcategory.tpl");
                 $sub_html_t = str_replace("{subcat_id}", $sub["id"], $sub_html_t);
                 $sub_html_t = str_replace("{subcat_name}", $sub["name"], $sub_html_t);
+                $sub_html_t = str_replace("{categories_counter_messages}", $sub["categories_counter_messages"], $sub_html_t);
                 $sub_html .= $sub_html_t;
             }
 

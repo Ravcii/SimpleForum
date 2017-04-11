@@ -3,7 +3,7 @@
         <div id="message" class="{show}">{message}</div>
         <form method="POST" action="/newtopic.parent={pid}">
             <input type="hidden" name="action" value="true" />
-            <h2 class="highlighted">Заголовок:</h2>
+            <span class="highlighted">Заголовок:</span>
             <div class="form_input">
                 <input type="text" name="title" class="topic_title" required />
             </div>
