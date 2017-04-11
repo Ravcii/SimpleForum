@@ -52,9 +52,7 @@ switch($_GET["page"]){
 		$template->addFile("header.tpl");
 		$template->addFile("/topic/topic.tpl");
 		$template->addFile("footer.tpl");
-<<<<<<< HEAD
 
-=======
         
         if($_POST["action"]){
             $msg = Topic::sendAnswer($id, $_SESSION["id"], $_POST["text"]);
@@ -77,14 +75,12 @@ switch($_GET["page"]){
 		
 		$template->addFile("header.tpl");
 		$template->addFile("/new_topic/new_topic.tpl");
-		$template->addFile("footer.tpl");
-        
+
         if($_POST["action"]){
-            $msg = Topic::createTopic($id, $_POST["title"], $_POST["text"], $_SESSION["id"]);
+            $msg = Topic::createTopic($_POST["title"], $_POST["text"], $_SESSION["id"], $_POST["parent_id"]);
         }
-        
+
         $template->replaceString("{topic_id}", $id);
->>>>>>> Sashka
         $template->replaceString("{topic_title}", $topicTitle);
         $template->replaceString("{user_messages}", Topic::getUserMessagesAsHtml($id));
 		break;
@@ -125,14 +121,6 @@ switch($_GET["page"]){
         User::logout();
         break;
 
-    case "create_topic":
-
-        $template->addTitle("Создание новой темы");
-        $template->addFile("header.tpl");
-        $template->addFile("/section//topics/topic_create.html");
-        $template->addFile("footer.tpl");
-
-        break;
 }
 
 //Глобальные репллейсеры, которые нужны на многих страницах.

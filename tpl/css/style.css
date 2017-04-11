@@ -239,6 +239,23 @@ ul.hr li {
     background: #ff8f8f;
 }
 
+.fast_answer .buttonMessages {
+    display: inline-block;
+    background: #d66d6b;
+    margin-left: 10px;
+    color: white;
+    text-decoration: none;
+    padding: 7px 15px;
+    outline: none;
+    border-radius: 3px;
+    border: 0;
+}
+
+.fast_answer .buttonMessages:hover {
+    cursor: pointer;
+    background: #ff8f8f;
+}
+
 footer {
     margin: 20px 0;
 }
@@ -251,6 +268,7 @@ footer p {
 .new_topic_button{
     display: inline-block;
     color: #d66d6b;
+    background-color: white;
     margin-top: 10px;
     margin-bottom: 10px;
     text-decoration: none;

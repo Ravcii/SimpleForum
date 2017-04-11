@@ -55,7 +55,7 @@ class Topic {
     
     public static function sendAnswer($tid, $uid, $text){
         global $db;
-        
+
         if($tid <= 0 || $uid <= 0)
             return "Авторизуйтесь!";
         
@@ -72,20 +72,22 @@ class Topic {
         }
     }
     
-    public static function createTopic($parent, $title, $text, $uid){
+    public static function createTopic($title,$text,$uid,$parent){
         global $db;
-        
+
         if($parent <= 0 || $uid <= 0)
-            return "Авторизуйтесь!";
+           return "Авторизуйтесь!";
         
         //TODO: Сделать прооверки на существование темы, юзера.
-        
+
+        $title = $db->real_escape_string($title);
         $text = $db->real_escape_string($text);
-        $tid = $db->real_escape_string($tid);
         $uid = $db->real_escape_string($uid);
-        
-        if($db->query("INSERT INTO `messages` VALUES (null, '{$uid}', '{$tid}', '{$text}', NOW());")){
-            return "Ваше сообщение отправлено!";
+        //echo $title;
+        echo $parent;
+        if($db->query("INSERT INTO `topics` VALUES (NULL, '{$title}', '{$parent}', '1', '0', '0');")){
+            $db->query("INSERT INTO `messages` VALUES (null, '{$uid}', '{$uid}', '{$text}', NOW());");
+            return "Вы создали новую тему!";
         } else {
             return "Произошло ошибка, сообщите системноу администратору.";
         }
