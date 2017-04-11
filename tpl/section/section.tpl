@@ -1,3 +1,4 @@
 {categories_placer}
-<a href="/?page=new_topic" class="new_topic_button" >Новая тема</a>
+<a href="newtopic.parent={current_category_id}" class="new_topic_button right">Новая тема</a>
+<div class="clear"></div>
 {topics_placer}

@@ -54,6 +54,10 @@ ul.hr li {
     vertical-align: middle;
 }
 
+ul.hr li a{
+    color: #fff;
+}
+
 #header_title {
     background-color: #994e4d;
     height: 50px;
@@ -215,7 +219,7 @@ ul.hr li {
     display: none;
     border: 1px solid #d66d6b;
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
+    color: #d66d6b;
 }
 
 .fast_answer #message.show {
@@ -273,15 +277,19 @@ footer p {
     margin-bottom: 10px;
     text-decoration: none;
     user-select: none;
-    padding: .4em 2em;
+    padding: 10px 25px;
     outline: none;
     border: 2px solid;
     border-radius: 1px;
     transition: 0.2s;
 }
 
-a.new_topic_button:active { background: #d66d6b; }
+a.new_topic_button:hover {
+    cursor: pointer;
+    background: rgba(214, 109, 107, 0.2);
+}
 
-.header_button{
-    color: #fff;
+input.topic_title{
+    width: 100%;
+    border: 0;
 }
