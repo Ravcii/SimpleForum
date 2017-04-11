@@ -30,7 +30,7 @@ class Topic {
 
         $view_topic['counter_view'] = $view_topic['counter_view'] + 1;
 
-        $db->query("UPDATE topics  SET counter_view = '{$view_topic['counter_view']}' WHERE id = '{$id}';");
+        $db->query("UPDATE topics SET counter_view = '{$view_topic['counter_view']}' WHERE id = '{$id}';");
 
         return  $view_topic['counter_view'];
     }
@@ -56,11 +56,14 @@ class Topic {
     public static function sendAnswer($tid, $uid, $text){
         global $db;
 
-        if($tid <= 0 || $uid <= 0)
+        if($text == "") {
+            return "Заполните поле сообщение.";
+        } else if($uid <= 0) {
             return "Авторизуйтесь!";
-        
-        //TODO: Сделать прооверки на существование темы, юзера.
-        
+        } else if($db->query("SELECT COUNT(*) FROM `topics` WHERE `id` = '{$tid}';")->num_rows() == 0){
+            return "Неверный id темы.";
+        }
+
         $text = $db->real_escape_string($text);
         $tid = $db->real_escape_string($tid);
         $uid = $db->real_escape_string($uid);
@@ -72,22 +75,30 @@ class Topic {
         }
     }
     
-    public static function createTopic($title,$text,$uid,$parent){
+    public static function createTopic($title, $text, $uid, $parent){
         global $db;
-
-        if($parent <= 0 || $uid <= 0)
-           return "Авторизуйтесь!";
         
-        //TODO: Сделать прооверки на существование темы, юзера.
+        if($title == "") {
+            return "Заполните заголовок топика.";
+        } else if($text == "") {
+            return "Заполните содержимое топика.";
+        } else if($uid <= 0) {
+            return "Авторизуйтесь!";
+        } else if($db->query("SELECT `id` FROM `categories` WHERE `id` = '{$parent}';")->num_rows <= 0){
+            return "Люк, кто твой отец?";
+        }
 
         $title = $db->real_escape_string($title);
         $text = $db->real_escape_string($text);
         $uid = $db->real_escape_string($uid);
-        //echo $title;
-        echo $parent;
-        if($db->query("INSERT INTO `topics` VALUES (NULL, '{$title}', '{$parent}', '1', '0', '0');")){
-            $db->query("INSERT INTO `messages` VALUES (null, '{$uid}', '{$uid}', '{$text}', NOW());");
-            return "Вы создали новую тему!";
+        
+        if($db->query("INSERT INTO `topics` VALUES (null, '{$title}', '{$parent}', '1', '0', '0');")){
+            $tid = $db->insert_id;
+            header("/topic.id={$tid}");
+            if($db->query("INSERT INTO `messages` VALUES (null, '{$uid}', '{$tid}', '{$text}', NOW());")){
+                header("/topic.id={$tid}");
+            }
+            return "Хедер, заработай, плиз :с. Тема создалась короче, не ссы";
         } else {
             return "Произошло ошибка, сообщите системноу администратору.";
         }

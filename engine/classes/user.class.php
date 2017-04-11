@@ -56,6 +56,7 @@ class User {
     }
     
     public static function logout(){
+        $_SESSION["auth"] = false;
         session_destroy();
         header("Location: /");
     }

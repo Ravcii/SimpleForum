@@ -55,7 +55,6 @@ class Section {
             $result[] = $row;
         }
 
-
         return $result;
     }
 
