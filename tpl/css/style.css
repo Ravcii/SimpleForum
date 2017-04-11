@@ -6,7 +6,7 @@
 
 a, a:visited {
     text-decoration: none;
-    color: #FFF;
+    /*color: #FFF;*/
 }
 
 li {
@@ -239,6 +239,23 @@ ul.hr li {
     background: #ff8f8f;
 }
 
+.fast_answer .buttonMessages {
+    display: inline-block;
+    background: #d66d6b;
+    margin-left: 10px;
+    color: white;
+    text-decoration: none;
+    padding: 7px 15px;
+    outline: none;
+    border-radius: 3px;
+    border: 0;
+}
+
+.fast_answer .buttonMessages:hover {
+    cursor: pointer;
+    background: #ff8f8f;
+}
+
 footer {
     margin: 20px 0;
 }
@@ -246,4 +263,25 @@ footer {
 footer p {
     margin: 0 auto;
     text-align: center;
+}
+
+.new_topic_button{
+    display: inline-block;
+    color: #d66d6b;
+    background-color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    user-select: none;
+    padding: .4em 2em;
+    outline: none;
+    border: 2px solid;
+    border-radius: 1px;
+    transition: 0.2s;
+}
+
+a.new_topic_button:active { background: #d66d6b; }
+
+.header_button{
+    color: #fff;
 }

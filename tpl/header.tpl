@@ -17,17 +17,17 @@
         <div id="header_title">
             <div class="left">
                 <ul class="hr">
-                    <li><a href="/">Главная страница</a></li>
+                    <li><a href="/" class="header_button">Главная страница</a></li>
                 </ul>    
             </div>
             <div class="right">
                 <ul class="hr">
                     {ifLogged}
-                        <li><a href="#">{user[login]}</a></li>
-                        <li><a href="/logout">Выход</a></li>
+                        <li><a href="#" class="header_button">{user[login]}</a></li>
+                        <li><a href="/logout" class="header_button">Выход</a></li>
                     {else}
-                        <li><a href="/login">Авторизация</a></li>
-                        <li><a href="/register">Регистрация</a></li>
+                        <li><a href="/login" class="header_button">Авторизация</a></li>
+                        <li><a href="/register" class="header_button">Регистрация</a></li>
                     {end}
                 </ul>  
             </div>

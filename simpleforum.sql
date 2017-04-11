@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.5
+-- version 4.0.10.10
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 31 2017 г., 04:21
--- Версия сервера: 5.1.67-community-log
--- Версия PHP: 5.2.17
+-- Время создания: Апр 09 2017 г., 22:33
+-- Версия сервера: 5.5.45
+-- Версия PHP: 5.4.44
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `parent` int(11) DEFAULT NULL,
+  `categories_counter_messages` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
@@ -37,15 +38,15 @@ CREATE TABLE IF NOT EXISTS `categories` (
 -- Дамп данных таблицы `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `parent`) VALUES
-(1, 'Раздел новостей', NULL),
-(2, 'Оффтопик', NULL),
-(3, 'Новости в мире', 1),
-(4, 'Новости в России', 1),
-(5, 'Рисунки', 2),
-(6, 'Музыка', 2),
-(7, 'Общение', 2),
-(8, 'Игры', 2);
+INSERT INTO `categories` (`id`, `name`, `parent`, `categories_counter_messages`) VALUES
+(1, 'Раздел новостей', NULL, 0),
+(2, 'Оффтопик', NULL, 0),
+(3, 'Новости в мире', 1, 0),
+(4, 'Новости в России', 1, 0),
+(5, 'Рисунки', 2, 0),
+(6, 'Музыка', 2, 0),
+(7, 'Общение', 2, 0),
+(8, 'Игры', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -60,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `message` longtext NOT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Дамп данных таблицы `messages`
@@ -68,7 +69,43 @@ CREATE TABLE IF NOT EXISTS `messages` (
 
 INSERT INTO `messages` (`id`, `uid`, `tid`, `message`, `date`) VALUES
 (1, 1, 1, 'Пример сообщения один.', '2017-03-31 00:56:48'),
-(2, 1, 1, 'Пример сообщения два.', '2017-03-31 00:56:53');
+(2, 1, 1, 'Пример сообщения два.', '2017-03-31 00:56:53'),
+(3, 2, 1, 'sdsadsadasdasdasdas', '2017-04-09 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `sections`
+--
+
+CREATE TABLE IF NOT EXISTS `sections` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text NOT NULL,
+  `parent` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `subcategories`
+--
+
+CREATE TABLE IF NOT EXISTS `subcategories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text NOT NULL,
+  `parent` int(11) DEFAULT NULL,
+  `sub_counter_messages` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Дамп данных таблицы `subcategories`
+--
+
+INSERT INTO `subcategories` (`id`, `name`, `parent`, `sub_counter_messages`) VALUES
+(1, 'Разделы', NULL, 0),
+(2, 'Тестовый подраздел', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -80,6 +117,9 @@ CREATE TABLE IF NOT EXISTS `topics` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `parent` int(11) NOT NULL,
+  `counter_messages` int(11) NOT NULL,
+  `counter_view` int(11) NOT NULL,
+  `last_messages` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
@@ -87,8 +127,8 @@ CREATE TABLE IF NOT EXISTS `topics` (
 -- Дамп данных таблицы `topics`
 --
 
-INSERT INTO `topics` (`id`, `title`, `parent`) VALUES
-(1, 'Пример топика', 7);
+INSERT INTO `topics` (`id`, `title`, `parent`, `counter_messages`, `counter_view`, `last_messages`) VALUES
+(1, 'Пример топика', 7, 1, 117, 2);
 
 -- --------------------------------------------------------
 

@@ -24,7 +24,7 @@ switch($_GET["page"]){
         $template->addFile("header.tpl");
         $template->addFile("/section/section.tpl");
         $template->addFile("footer.tpl");
-        
+
         $subCatHtml = Section::getSubCategoriesAsHtml($id);
         if($subCatHtml != ""){
             $template->replaceString("{categories_placer}", $subCatHtml);
@@ -46,10 +46,13 @@ switch($_GET["page"]){
         $topicTitle = Topic::getTitle($id);
     
 		$template->addTitle($topicTitle);
-		
+
+		Topic::getCounterViewTopic($id);
+
 		$template->addFile("header.tpl");
 		$template->addFile("/topic/topic.tpl");
 		$template->addFile("footer.tpl");
+
         
         if($_POST["action"]){
             $msg = Topic::sendAnswer($id, $_SESSION["id"], $_POST["text"]);
@@ -72,12 +75,11 @@ switch($_GET["page"]){
 		
 		$template->addFile("header.tpl");
 		$template->addFile("/new_topic/new_topic.tpl");
-		$template->addFile("footer.tpl");
-        
+
         if($_POST["action"]){
-            $msg = Topic::createTopic($id, $_POST["title"], $_POST["text"], $_SESSION["id"]);
+            $msg = Topic::createTopic($_POST["title"], $_POST["text"], $_SESSION["id"], $_POST["parent_id"]);
         }
-        
+
         $template->replaceString("{topic_id}", $id);
         $template->replaceString("{topic_title}", $topicTitle);
         $template->replaceString("{user_messages}", Topic::getUserMessagesAsHtml($id));
@@ -118,6 +120,7 @@ switch($_GET["page"]){
     case "logout":
         User::logout();
         break;
+
 }
 
 //Глобальные репллейсеры, которые нужны на многих страницах.

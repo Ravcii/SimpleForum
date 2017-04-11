@@ -5,8 +5,8 @@
     <td class="name">
         <a href="/topic.id={topic_id}" class="n">{topic_name}</a>
     </td>
-    <td class="topics">0</td>
-    <td class="answers">0</td>
+    <td class="topics">{counter_view}</td>
+    <td class="answers">{counter_messages}</td>
     <td class="last">.</td>
     </td>
 </tr>
