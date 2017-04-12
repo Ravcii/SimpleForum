@@ -6,7 +6,7 @@
 
 a, a:visited {
     text-decoration: none;
-    color: #FFF;
+    /*color: #FFF;*/
 }
 
 li {
@@ -52,6 +52,38 @@ ul.hr li {
     display: table-cell;
     padding: 10px;
     vertical-align: middle;
+}
+
+ul.hr li a{
+    color: #fff;
+}
+
+ul li ul.popout{
+    position: absolute;
+    display: none;
+    background: #FFF;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    width: 100px;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: -32px;
+}
+
+ul li:hover ul.popout{
+    display: block;
+}
+
+ul li ul.popout li{
+    display: block;
+}
+
+ul li ul.popout li:hover{
+    background: #EEE;
+}
+
+ul li ul.popout li a{
+    color: #000;
 }
 
 #header_title {
@@ -145,10 +177,14 @@ ul.hr li {
 }
 
 .user_avatar {
-    width: 100px;
-    height: 100px;
-    background: #d66d6b;
     display: inline-block;
+}
+
+.user_avatar img {
+    max-width: 130px;
+    max-height: 130px;
+    border-radius: 3px;
+    border: 1px solid #d66d6b;
 }
 
 .highlighted {
@@ -198,30 +234,61 @@ ul.hr li {
 
 .fast_answer .form_input {
     margin: 10px 0;
+    border: 1px #CCC solid;
+    padding: 10px 15px;
+    background: #FFF;
 }
 
 .fast_answer .form_input textarea{
     width: 100%;
-    border: 1px #CCC solid;
+    border: 0;
     resize: none;
 }
 
-.fast_answer .back_button {
-    margin-left: 515px;
+.fast_answer #message {
+    border-radius: 3px;
+    margin: 10px 0;
+    display: none;
+    border: 1px solid #d66d6b;
+    padding: 10px;
+    color: #d66d6b;
 }
 
-.fast_answer a.buttonMessages {
+.fast_answer #message.show {
+    display: block;
+}
+
+.fast_answer .buttonMessages {
     display: inline-block;
     background: #d66d6b;
     margin-left: 10px;
     color: white;
     text-decoration: none;
-    padding: 5px 15px;
+    padding: 7px 15px;
     outline: none;
     border-radius: 3px;
+    border: 0;
 }
 
-.fast_answer  a.buttonMessages:hover {
+.fast_answer .buttonMessages:hover {
+    cursor: pointer;
+    background: #ff8f8f;
+}
+
+.fast_answer .buttonMessages {
+    display: inline-block;
+    background: #d66d6b;
+    margin-left: 10px;
+    color: white;
+    text-decoration: none;
+    padding: 7px 15px;
+    outline: none;
+    border-radius: 3px;
+    border: 0;
+}
+
+.fast_answer .buttonMessages:hover {
+    cursor: pointer;
     background: #ff8f8f;
 }
 
@@ -232,4 +299,46 @@ footer {
 footer p {
     margin: 0 auto;
     text-align: center;
+}
+
+.new_topic_button{
+    display: inline-block;
+    color: #d66d6b;
+    background-color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    user-select: none;
+    padding: 10px 25px;
+    outline: none;
+    border: 2px solid;
+    border-radius: 1px;
+    transition: 0.2s;
+}
+
+a.new_topic_button:hover {
+    cursor: pointer;
+    background: rgba(214, 109, 107, 0.2);
+}
+
+input.topic_title{
+    width: 100%;
+    border: 0;
+}
+
+.pagination{
+    padding-bottom: 10px;
+}
+.pagination_button a{
+    color: white;
+}
+
+.pagination_button{
+    display: inline-block;
+    background: #d66d6b;
+    color: white;
+    padding: 2px 8px;
+    outline: none;
+    /*border-radius: 3px;*/
+    border: 0;
 }

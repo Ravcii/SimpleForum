@@ -3,7 +3,6 @@
         <th class="name" colspan="2">Темы</th>
         <th class="topics">Просмотры</th>
         <th class="answers">Ответы</th>
-        <th class="last">Последнее сообщение</th>
     </tr>
     {topics}
 </table>

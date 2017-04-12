@@ -5,8 +5,7 @@
     <td class="name">
         <a href="/section.id={subcat_id}" class="n">{subcat_name}</a>
     </td>
-    <td class="topics">0</td>
-    <td class="answers">0</td>
-    <td class="last">.</td>
+    <td class="topics">{categories_counter_topics}</td>
+    <td class="answers">{categories_counter_messages}</td>
     </td>
 </tr>

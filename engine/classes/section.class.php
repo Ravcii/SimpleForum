@@ -13,7 +13,7 @@ class Section {
         global $db;
 
         $result = array();
-        $subCategories = $db->query("SELECT `id`, `name` FROM `categories` WHERE `parent` = '{$parentId}';");
+        $subCategories = $db->query("SELECT `id`, `name`, `categories_counter_topics`, `categories_counter_messages`FROM `categories` WHERE `parent` = '{$parentId}';");
         while ($row = $subCategories->fetch_assoc()) {
             $result[] = $row;
         }
@@ -35,6 +35,8 @@ class Section {
 
             $categoryHtml = str_replace("{cat_id}", $cat["id"], $categoryHtml);
             $categoryHtml = str_replace("{cat_name}", $cat["name"], $categoryHtml);
+            $categoryHtml = str_replace("{categories_counter_topics}", $cat["categories_counter_topics"], $categoryHtml);
+            $categoryHtml = str_replace("{categories_counter_messages}", $cat["categories_counter_messages"], $categoryHtml);
 
             $categoriesHtml .= $categoryHtml;
         }
@@ -50,7 +52,7 @@ class Section {
 
         $result = array();
 
-        $topics = $db->query("SELECT `id`, `title` FROM `topics` WHERE `parent` = '{$parentId}';");
+        $topics = $db->query("SELECT `id`, `title`, `counter_messages` ,`counter_view` FROM `topics` WHERE `parent` = '{$parentId}';");
         while ($row = $topics->fetch_assoc()) {
             $result[] = $row;
         }
@@ -58,11 +60,21 @@ class Section {
         return $result;
     }
 
+    public static function  getLastMessagesUser($id){
+        global $db;
+
+        $all_messages = $db->query("SELECT `id`, `uid` FROM `messages` WHERE `tid` = '{$id}';");
+
+        while ($row = $all_messages->fetch_assoc()) {
+            $result[] = $row;
+        }
+    }
     public static function getTopicsAsHtml($parentId)
     {
         global $template;
-        
+
         $topics = Section::getTopicsAsArray($parentId);
+
         if(empty($topics)) return "";
 
         $returnHtml = $template->getTextFromFile("/section/topics_placer.tpl");
@@ -72,6 +84,9 @@ class Section {
 
             $topicHtml = str_replace("{topic_id}", $topic["id"], $topicHtml);
             $topicHtml = str_replace("{topic_name}", $topic["title"], $topicHtml);
+            $topicHtml = str_replace("{counter_view}", $topic["counter_view"], $topicHtml);
+            $topicHtml = str_replace("{counter_messages}", $topic["counter_messages"], $topicHtml);
+            $topicHtml = str_replace("{counter_messages}", $topic["counter_messages"], $topicHtml);
 
             $topicsHtml .= $topicHtml;
         }
