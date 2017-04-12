@@ -293,3 +293,20 @@ input.topic_title{
     width: 100%;
     border: 0;
 }
+
+.pagination{
+    padding-bottom: 10px;
+}
+.pagination_button a{
+    color: white;
+}
+
+.pagination_button{
+    display: inline-block;
+    background: #d66d6b;
+    color: white;
+    padding: 2px 8px;
+    outline: none;
+    /*border-radius: 3px;*/
+    border: 0;
+}
