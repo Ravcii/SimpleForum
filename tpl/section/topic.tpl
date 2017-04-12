@@ -7,6 +7,5 @@
     </td>
     <td class="topics">{counter_view}</td>
     <td class="answers">{counter_messages}</td>
-    <td class="last">.</td>
     </td>
 </tr>

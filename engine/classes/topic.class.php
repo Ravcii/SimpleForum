@@ -68,6 +68,7 @@ class Topic
             return "Неверный id темы.";
         }
 
+        $parent = $db->query("SELECT `parent` FROM `topics` WHERE `id` = '{$tid}';")->fetch_assoc();
         $text = $db->real_escape_string($text);
         $tid = $db->real_escape_string($tid);
         $uid = $db->real_escape_string($uid);
@@ -75,11 +76,38 @@ class Topic
         if ($db->query("INSERT INTO `messages` VALUES (null, '{$uid}', '{$tid}', '{$text}', NOW());")) {
             //Кол-во сообщений +1
             $db->query("UPDATE `topics` SET `counter_messages` = `counter_messages` + 1 WHERE id = '{$tid}';");
+            $db->query("UPDATE `categories` SET `categories_counter_messages` = `categories_counter_messages` + 1 WHERE `id` = '{$parent["parent"]}';");
+
+            Topic::addCounterCategoriesViewMessages($parent["parent"]);
 
             return "Ваше сообщение отправлено!";
         } else {
             return "Произошло ошибка, сообщите системноу администратору.";
         }
+    }
+
+    public static function addCounterCategoriesViewMessages($id){
+        global $db;
+
+        $parent_section = $db->query("SELECT `parent` FROM `categories` WHERE `id` = '{$id}';")->fetch_assoc();
+
+        if ($parent_section["parent"] != NULL) {
+                Topic::addCounterCategoriesViewMessages($parent_section["parent"]);
+        }
+
+        $db->query("UPDATE `categories` SET `categories_counter_messages` = `categories_counter_messages` + 1 WHERE `id` = '{$id}';");
+    }
+
+    public static function addCounterCategoriesViewTopics($id){
+        global $db;
+
+        $parent_section = $db->query("SELECT `parent` FROM `categories` WHERE `id` = '{$id}';")->fetch_assoc();
+
+        if ($parent_section["parent"] != NULL) {
+            Topic::addCounterCategoriesViewTopics($parent_section["parent"]);
+        }
+
+        $db->query("UPDATE `categories` SET `categories_counter_topics` = `categories_counter_topics` + 1 WHERE `id` = '{$id}';");
     }
 
     public static function createTopic($title, $text, $uid, $parent)
@@ -100,13 +128,16 @@ class Topic
         $text = $db->real_escape_string($text);
         $uid = $db->real_escape_string($uid);
 
-        //Кол-во сообщений +1
+        //Кол-во тем +1
+        $db->query("UPDATE `categories` SET `categories_counter_topics` = `categories_counter_topics` + 1 WHERE `id` = '{$parent}';");
         $db->query("UPDATE `categories` SET `categories_counter_messages` = `categories_counter_messages` + 1 WHERE `id` = '{$parent}';");
+
+        Topic::addCounterCategoriesViewTopics($parent["parent"]);
 
         if ($db->query("INSERT INTO `topics` VALUES (null, '{$title}', '{$parent}', '1', '0', '0');")) {
             $tid = $db->insert_id;
             ob_start();
-            header("Location: /topic.id=". $tid);
+            header("Location: /topic.id=" . $tid);
             ob_end_flush();
             $db->query("INSERT INTO `messages` VALUES (null, '{$uid}', '{$tid}', '{$text}', NOW());");
 

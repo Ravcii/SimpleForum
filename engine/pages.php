@@ -11,7 +11,7 @@ switch($page){
 		$template->addFile("header.tpl");
 		$template->addFile("/categories/categories.tpl");
 		$template->addFile("footer.tpl");
-        
+
         $template->replaceString("{categories}", Categories::getCategoriesAsHtml());
         break;
         
