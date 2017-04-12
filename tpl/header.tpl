@@ -23,8 +23,13 @@
             <div class="right">
                 <ul class="hr">
                     {ifLogged}
-                        <li><a href="#" class="header_button">{user[login]}</a></li>
-                        <li><a href="/logout" class="header_button">Выход</a></li>
+                        <li>
+                            <a href="#" class="header_button">{user[login]}</a>
+                            <ul class="popout">
+                                <li><a href="/settings">Настройки</a></li>
+                                <li><a href="/logout">Выход</a></li>
+                            </ul>
+                        </li>
                     {else}
                         <li><a href="/login" class="header_button">Авторизация</a></li>
                         <li><a href="/register" class="header_button">Регистрация</a></li>

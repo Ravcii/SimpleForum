@@ -58,6 +58,34 @@ ul.hr li a{
     color: #fff;
 }
 
+ul li ul.popout{
+    position: absolute;
+    display: none;
+    background: #FFF;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    width: 100px;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: -32px;
+}
+
+ul li:hover ul.popout{
+    display: block;
+}
+
+ul li ul.popout li{
+    display: block;
+}
+
+ul li ul.popout li:hover{
+    background: #EEE;
+}
+
+ul li ul.popout li a{
+    color: #000;
+}
+
 #header_title {
     background-color: #994e4d;
     height: 50px;
@@ -149,10 +177,14 @@ ul.hr li a{
 }
 
 .user_avatar {
-    width: 100px;
-    height: 100px;
-    background: #d66d6b;
     display: inline-block;
+}
+
+.user_avatar img {
+    max-width: 130px;
+    max-height: 130px;
+    border-radius: 3px;
+    border: 1px solid #d66d6b;
 }
 
 .highlighted {

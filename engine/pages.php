@@ -79,7 +79,7 @@ switch($page){
 		$template->addTitle("Новая тема");
 		
 		$template->addFile("header.tpl");
-		$template->addFile("/new_topic/new_topic.tpl");
+		$template->addFile("/new_topic.tpl");
 
         if(isset($_POST["action"]) && $_POST["action"]){
             $msg = Topic::createTopic($_POST["title"], $_POST["text"], $_SESSION["id"], $pid);
@@ -120,7 +120,34 @@ switch($page){
             $template->replaceString("{message}", $msg);
             $template->replaceString("{show}", "show");
         }
-        break;  
+        break;
+        
+    case "settings":
+        if(!isset($_SESSION["auth"]) && !$_SESSION["auth"]){
+            header("Location: /");
+        }
+    
+		$template->addTitle("Настройки");
+		
+		$template->addFile("header.tpl");
+		$template->addFile("/settings.tpl");
+
+        if(isset($_POST["action"]) && $_POST["action"]){
+            $msg = "";
+            if($_POST["pass"] != "" && $_POST["repass"] != ""){
+                $msg = User::changePassword($_SESSION["id"], $_POST["pass"], $_POST["repass"]);
+            }
+            if($_FILES["avatar"]["tmp_name"] != "" && $_FILES["avatar"]["size"] > 0){
+                $temp_msg = User::uploadAvatar($_SESSION["id"], $_FILES["avatar"]);
+                $msg .= ($msg == "") ? $temp_msg : "<br>".$temp_msg;
+            }
+            if($msg != ""){
+                $template->replaceString("{message}", $msg);
+                $template->replaceString("{show}", "show");
+            }
+        }
+    
+        break;
             
     case "logout":
         User::logout();

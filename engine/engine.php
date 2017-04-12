@@ -1,8 +1,10 @@
 <?php
+
+//Отображение всех ошибок
 error_reporting(E_ALL);
 ini_set('display_errors','On');
 
-//Base classes
+//Основные классы
 require_once("config.php");
 
 require_once("classes/template.class.php");
