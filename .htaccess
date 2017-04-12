@@ -7,3 +7,4 @@ RewriteEngine on
     RewriteRule ^topic\.id\=(.*)$ /?page=topic&id=$1 [L]
     RewriteRule ^newtopic\.parent\=(.*)$ /?page=new_topic&parent_id=$1 [L]
     RewriteRule ^section\.id\=(.*)$ /?page=section&id=$1 [L]
+    RewriteRule ^settings$ /?page=settings [L]
