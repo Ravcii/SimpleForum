@@ -32,12 +32,9 @@ class Topic
         global $db;
 
         $view_topic = $db->query("SELECT `counter_view` FROM `topics` WHERE `id` = '{$id}';")->fetch_assoc();
+        $db->query("UPDATE `topics` SET `counter_view` = `counter_view` + 1 WHERE `id` = '{$id}';");
 
-        $view_topic['counter_view'] = $view_topic['counter_view'] + 1;
-
-        $db->query("UPDATE topics SET counter_view = '{$view_topic['counter_view']}' WHERE id = '{$id}';");
-
-        return $view_topic['counter_view'];
+        return $view_topic['counter_view'] + 1;
     }
 
     public static function getUserMessagesAsHtml($id)
@@ -76,10 +73,8 @@ class Topic
         $uid = $db->real_escape_string($uid);
 
         if ($db->query("INSERT INTO `messages` VALUES (null, '{$uid}', '{$tid}', '{$text}', NOW());")) {
-
-            $counter_messages = $db->query("SELECT `counter_messages` FROM `topics` WHERE `id` = '{$tid}';")->fetch_assoc();
-            $counter_messages['counter_messages'] = $counter_messages['counter_messages'] + 1;
-            $db->query("UPDATE topics SET counter_messages = '{$counter_messages['counter_messages']}' WHERE id = '{$tid}';");
+            //Кол-во сообщений +1
+            $db->query("UPDATE `topics` SET `counter_messages` = `counter_messages` + 1 WHERE id = '{$tid}';");
 
             return "Ваше сообщение отправлено!";
         } else {
@@ -105,18 +100,17 @@ class Topic
         $text = $db->real_escape_string($text);
         $uid = $db->real_escape_string($uid);
 
-        $counter_topics = $db->query("SELECT `categories_counter_messages` FROM `categories` WHERE `id` = '{$parent}';")->fetch_assoc();
-        $counter_topics['categories_counter_messages'] = $counter_topics['categories_counter_messages'] + 1;
-        $db->query("UPDATE `categories` SET `categories_counter_messages` = '{$counter_topics['categories_counter_messages']}' WHERE `id` = '{$parent}';");
+        //Кол-во сообщений +1
+        $db->query("UPDATE `categories` SET `categories_counter_messages` = `categories_counter_messages` + 1 WHERE `id` = '{$parent}';");
 
         if ($db->query("INSERT INTO `topics` VALUES (null, '{$title}', '{$parent}', '1', '0', '0');")) {
             $tid = $db->insert_id;
             ob_start();
-            header("Location: /topic.id={$tid}  ");
+            header("Location: /topic.id=". $tid);
             ob_end_flush();
             $db->query("INSERT INTO `messages` VALUES (null, '{$uid}', '{$tid}', '{$text}', NOW());");
 
-            return "Хедер, заработай, плиз :с. Тема создалась короче, не ссы";
+            return true;
         } else {
             return "Произошло ошибка, сообщите системноу администратору.";
         }

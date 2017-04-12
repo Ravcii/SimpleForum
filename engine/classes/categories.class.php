@@ -22,14 +22,11 @@ class Categories {
         global $db;
 
         $view_categories = $db->query("SELECT `categories_counter_view` FROM `categories` WHERE `id` = '{$id}';")->fetch_assoc();
+        $db->query("UPDATE `topics` SET `counter_view` = `counter_view` + 1 WHERE `id` = '{$id}';");
 
-        $view_topic['counter_view'] = $view_categories['counter_view'] + 1;
-
-        $db->query("UPDATE topics  SET counter_view = '{$view_topic['counter_view']}' WHERE id = '{$id}';");
-
-        return  $view_topic['counter_view'];
-
+        return $view_topic['counter_view'] + 1;
     }
+    
     public static function getCategoriesAsHtml() {
         global $template;
 
