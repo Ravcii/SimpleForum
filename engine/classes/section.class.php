@@ -66,8 +66,6 @@ class Section {
         while ($row = $all_messages->fetch_assoc()) {
             $result[] = $row;
         }
-
-        echo $result;
     }
     public static function getTopicsAsHtml($parentId)
     {

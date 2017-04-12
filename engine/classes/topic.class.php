@@ -1,7 +1,10 @@
 <?php
-class Topic {
 
-    public static function getTitle($id){
+class Topic
+{
+
+    public static function getTitle($id)
+    {
         global $db;
 
         $title = $db->query("SELECT `title` FROM `topics` WHERE `id` = '{$id}';")->fetch_assoc();
@@ -9,7 +12,8 @@ class Topic {
         return $title["title"];
     }
 
-    public static function getUserMessagesAsArray($id) {
+    public static function getUserMessagesAsArray($id)
+    {
         global $db;
 
         $result = array();
@@ -23,7 +27,8 @@ class Topic {
         return $result;
     }
 
-    public static function  getCounterViewTopic($id){
+    public static function getCounterViewTopic($id)
+    {
         global $db;
 
         $view_topic = $db->query("SELECT `counter_view` FROM `topics` WHERE `id` = '{$id}';")->fetch_assoc();
@@ -32,10 +37,11 @@ class Topic {
 
         $db->query("UPDATE topics SET counter_view = '{$view_topic['counter_view']}' WHERE id = '{$id}';");
 
-        return  $view_topic['counter_view'];
+        return $view_topic['counter_view'];
     }
 
-    public static function getUserMessagesAsHtml($id) {
+    public static function getUserMessagesAsHtml($id)
+    {
         global $template;
         $_html = "";
 
@@ -52,52 +58,64 @@ class Topic {
 
         return $_html;
     }
-    
-    public static function sendAnswer($tid, $uid, $text){
+
+    public static function sendAnswer($tid, $uid, $text)
+    {
         global $db;
 
-        if($text == "") {
+        if ($text == "") {
             return "Заполните поле сообщение.";
-        } else if($uid <= 0) {
+        } else if ($uid <= 0) {
             return "Авторизуйтесь!";
-        } else if($db->query("SELECT COUNT(*) FROM `topics` WHERE `id` = '{$tid}';")->num_rows() == 0){
+        } else if ($db->query("SELECT `id` FROM `topics` WHERE `id` = '{$tid}';")->num_rows <= 0) {
             return "Неверный id темы.";
         }
 
         $text = $db->real_escape_string($text);
         $tid = $db->real_escape_string($tid);
         $uid = $db->real_escape_string($uid);
-        
-        if($db->query("INSERT INTO `messages` VALUES (null, '{$uid}', '{$tid}', '{$text}', NOW());")){
+
+        if ($db->query("INSERT INTO `messages` VALUES (null, '{$uid}', '{$tid}', '{$text}', NOW());")) {
+
+            $counter_messages = $db->query("SELECT `counter_messages` FROM `topics` WHERE `id` = '{$tid}';")->fetch_assoc();
+            $counter_messages['counter_messages'] = $counter_messages['counter_messages'] + 1;
+            $db->query("UPDATE topics SET counter_messages = '{$counter_messages['counter_messages']}' WHERE id = '{$tid}';");
+
             return "Ваше сообщение отправлено!";
         } else {
             return "Произошло ошибка, сообщите системноу администратору.";
         }
     }
-    
-    public static function createTopic($title, $text, $uid, $parent){
+
+    public static function createTopic($title, $text, $uid, $parent)
+    {
         global $db;
-        
-        if($title == "") {
+
+        if ($title == "") {
             return "Заполните заголовок топика.";
-        } else if($text == "") {
+        } else if ($text == "") {
             return "Заполните содержимое топика.";
-        } else if($uid <= 0) {
+        } else if ($uid <= 0) {
             return "Авторизуйтесь!";
-        } else if($db->query("SELECT `id` FROM `categories` WHERE `id` = '{$parent}';")->num_rows <= 0){
+        } else if ($db->query("SELECT `id` FROM `categories` WHERE `id` = '{$parent}';")->num_rows <= 0) {
             return "Люк, кто твой отец?";
         }
 
         $title = $db->real_escape_string($title);
         $text = $db->real_escape_string($text);
         $uid = $db->real_escape_string($uid);
-        
-        if($db->query("INSERT INTO `topics` VALUES (null, '{$title}', '{$parent}', '1', '0', '0');")){
+
+        $counter_topics = $db->query("SELECT `categories_counter_messages` FROM `categories` WHERE `id` = '{$parent}';")->fetch_assoc();
+        $counter_topics['categories_counter_messages'] = $counter_topics['categories_counter_messages'] + 1;
+        $db->query("UPDATE `categories` SET `categories_counter_messages` = '{$counter_topics['categories_counter_messages']}' WHERE `id` = '{$parent}';");
+
+        if ($db->query("INSERT INTO `topics` VALUES (null, '{$title}', '{$parent}', '1', '0', '0');")) {
             $tid = $db->insert_id;
-            header("/topic.id={$tid}");
-            if($db->query("INSERT INTO `messages` VALUES (null, '{$uid}', '{$tid}', '{$text}', NOW());")){
-                header("/topic.id={$tid}");
-            }
+            ob_start();
+            header("Location: /topic.id={$tid}  ");
+            ob_end_flush();
+            $db->query("INSERT INTO `messages` VALUES (null, '{$uid}', '{$tid}', '{$text}', NOW());");
+
             return "Хедер, заработай, плиз :с. Тема создалась короче, не ссы";
         } else {
             return "Произошло ошибка, сообщите системноу администратору.";
