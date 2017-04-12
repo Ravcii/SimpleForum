@@ -13,7 +13,7 @@ class Section {
         global $db;
 
         $result = array();
-        $subCategories = $db->query("SELECT `id`, `name` FROM `categories` WHERE `parent` = '{$parentId}';");
+        $subCategories = $db->query("SELECT `id`, `name`, `categories_counter_topics`, `categories_counter_messages`FROM `categories` WHERE `parent` = '{$parentId}';");
         while ($row = $subCategories->fetch_assoc()) {
             $result[] = $row;
         }
@@ -35,6 +35,8 @@ class Section {
 
             $categoryHtml = str_replace("{cat_id}", $cat["id"], $categoryHtml);
             $categoryHtml = str_replace("{cat_name}", $cat["name"], $categoryHtml);
+            $categoryHtml = str_replace("{categories_counter_topics}", $cat["categories_counter_topics"], $categoryHtml);
+            $categoryHtml = str_replace("{categories_counter_messages}", $cat["categories_counter_messages"], $categoryHtml);
 
             $categoriesHtml .= $categoryHtml;
         }
