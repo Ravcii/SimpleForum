@@ -1,3 +1,5 @@
+<tr class="mobile_titles">
+    <th class="name" colspan="2">Темы</th>
 <tr>
     <td class="cat-image">
         <img src="./tpl/img/topics-default.png">

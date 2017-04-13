@@ -22,7 +22,7 @@ html, body {
 }
 
 body {
-    min-width: 900px;
+   /* min-width: 900px;*/
     background: url('../img/bg.png') repeat;
 }
 
@@ -221,6 +221,7 @@ ul li ul.popout li a{
 .text_messages {
     padding: 10px;
     width: 630px;
+    float: right;
 }
 
 .background_message_user {
@@ -362,3 +363,155 @@ input.topic_title{
     border: 2px solid #d66d6b;
     margin: 0 10px;
 }
+
+
+.mobile_titles{
+    display: none;
+}
+
+.mobile_titles .name{
+    display: none;
+}
+
+
+/* Мобильная версия */
+
+
+@media (max-width: 1025px) {
+    .category {
+        margin-bottom: 20px;
+        width: 840px;
+        border: none;
+        white-space: nowrap;
+        text-align: center;
+    }
+}
+
+
+@media (max-width: 920px) {
+    .category {
+        width: 740px;
+    }
+
+    .background_message_user {
+        max-width: 800px;
+    }
+
+    .text_messages {
+        word-wrap: break-word;
+        padding-left: 69px;
+        width: 550px;
+        margin-left: 90px;
+        float: none;
+    }
+    #main {
+        width: 800px;
+    }
+
+
+}
+
+@media (max-width: 860px) {
+    .category {
+        width: 640px;
+    }
+
+    .text_messages {
+        width: 430px;
+    }
+
+    #main {
+        width: 700px;
+    }
+}
+
+@media (max-width: 740px) {
+    .category {
+        width: 540px;
+    }
+
+    .text_messages {
+        width: 330px;
+    }
+
+    #main {
+        width: 600px;
+    }
+}
+
+
+@media (max-width: 630px) {
+    .category {
+        width: 440px;
+    }
+
+    .text_messages {
+        width: 230px;
+    }
+
+    #main {
+        width: 500px;
+    }
+}
+
+@media (max-width: 500px) {
+    .category {
+        width: 365px;
+    }
+
+    .text_messages {
+        width: 130px;
+    }
+
+    #main {
+        width: 400px;
+    }
+}
+
+@media (max-width: 400px) {
+    .category {
+        margin-bottom: 20px;
+        width: 165px;
+    }
+
+    .category .titles{
+        display: none;
+    }
+
+    .user_avatar{
+        display: none;
+    }
+
+    .text_messages {
+        width: 10px;
+    }
+
+    .mobile_titles {
+        width: 240px;
+        display: block;
+        border-radius: 5px 5px 5px 5px;
+        padding: 5px 5px;
+        background-color: #d66d6b;
+    }
+
+    .mobile_titles .name {
+        display: block;
+        font-weight: 100;
+    }
+
+    .category tbody{
+        float: left;
+    }
+    .category .topics {
+        display: none;
+    }
+    .category .answers{
+        display: none;
+    }
+    #main {
+        margin: 64px auto 0 auto;
+        width: 300px;
+    }
+}
+
+
