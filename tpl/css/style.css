@@ -327,18 +327,26 @@ input.topic_title{
 }
 
 .pagination{
-    padding-bottom: 10px;
-}
-.pagination_button a{
-    color: white;
+    margin: 10px;
+    text-align: center;
 }
 
 .pagination_button{
     display: inline-block;
-    background: #d66d6b;
-    color: white;
-    padding: 2px 8px;
+    color: #d66d6b;
+    padding: 3px 8px;
+    margin: 2px;
     outline: none;
-    /*border-radius: 3px;*/
-    border: 0;
+    border-radius: 3px;
+    border: 1px solid #d66d6b;
+}
+
+.pagination_button:hover{
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.pagination_button.here{
+    font-weight: bold;
+    border: 2px solid #d66d6b;
+    margin: 0 10px;
 }
