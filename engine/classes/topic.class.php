@@ -39,7 +39,7 @@ class Topic
         global $db;
 
         $result = array();
-        $messages = $db->query("SELECT `messages`.`id`, `messages`.`uid`, `messages`.`message`, `messages`.`date`, `users`.`login` FROM `messages` INNER JOIN `users` ON `messages`.`uid` = `users`.`id` WHERE `messages`.`tid` = '{$id}'LIMIT {$page}, ".MSG_PER_PAGE.";");
+        $messages = $db->query("SELECT `messages`.`id`, `messages`.`uid`, `messages`.`message`, `messages`.`date`, `users`.`login` FROM `messages` INNER JOIN `users` ON `messages`.`uid` = `users`.`id` WHERE `messages`.`tid` = '{$id}' ORDER BY `date` ASC LIMIT {$page},".MSG_PER_PAGE.";");
         while ($row = $messages->fetch_assoc()) {
             $result[] = $row;
         }
@@ -69,18 +69,21 @@ class Topic
     public static function getPaginationAsHtml($id, $now_page){
         global $template;
         $_html = "";
+        $pages = Topic::getCountOfPages($id);
+        
+        if($pages > 1){
+            for($i = 1; $i <= Topic::getCountOfPages($id); $i++) {
+                $page_html = $template->getTextFromFile("/topic/pagenation_button.tpl");
+                $page_html = str_replace("{tid}", $id, $page_html);
+                $page_html = str_replace("{page}", $i, $page_html);
+                if($now_page == $i){
+                    $page_html = str_replace("{now_here}", "here", $page_html);
+                } else {
+                    $page_html = str_replace("{now_here}", "", $page_html);
+                }
 
-        for($i = 1; $i <= Topic::getCountOfPages($id); $i++) {
-            $page_html = $template->getTextFromFile("/topic/pagenation_button.tpl");
-            $page_html = str_replace("{tid}", $id, $page_html);
-            $page_html = str_replace("{page}", $i, $page_html);
-            if($now_page == $i){
-                $page_html = str_replace("{now_here}", "here", $page_html);
-            } else {
-                $page_html = str_replace("{now_here}", "", $page_html);
+                $_html .= $page_html;
             }
-
-            $_html .= $page_html;
         }
 
         return $_html;

@@ -1,3 +1,5 @@
+<a onclick="history.go(-1)" class="new_topic_button left">Назад</a>
+<div class="clear"></div>
 <div class="topic">
     <span class="name">{topic_title}</span>
 </div>

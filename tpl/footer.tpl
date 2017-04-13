@@ -1,6 +1,6 @@
 		</div>
         <footer>
-			<p>&copy; DCP Team</p>
+			<p>Сделано на производственной практике. 2017г</p>
 		</footer>
 	</div>
 </body>

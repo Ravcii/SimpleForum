@@ -26,6 +26,18 @@ body {
     background: url('../img/bg.png') repeat;
 }
 
+body::before{
+    content: "";
+    background: url('../img/bg2.jpg') no-repeat;
+    opacity: 0.011;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+
 .right {
     float: right;
 }

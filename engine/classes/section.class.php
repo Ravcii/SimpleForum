@@ -13,7 +13,7 @@ class Section {
         global $db;
 
         $result = array();
-        $subCategories = $db->query("SELECT `id`, `name`, `categories_counter_topics`, `categories_counter_messages`FROM `categories` WHERE `parent` = '{$parentId}';");
+        $subCategories = $db->query("SELECT `id`, `name`, `categories_counter_topics`, `categories_counter_messages` FROM `categories` WHERE `parent` = '{$parentId}';");
         while ($row = $subCategories->fetch_assoc()) {
             $result[] = $row;
         }
