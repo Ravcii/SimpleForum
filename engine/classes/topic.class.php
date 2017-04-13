@@ -102,8 +102,6 @@ class Topic
         $text = $db->real_escape_string($text);
         $tid = $db->real_escape_string($tid);
         $uid = $db->real_escape_string($uid);
-        
-        echo $tid;
 
         if ($db->query("INSERT INTO `messages` VALUES (null, '{$uid}', '{$tid}', '{$text}', NOW());")) {
             //Кол-во сообщений +1 в топике
@@ -121,14 +119,10 @@ class Topic
         global $db;
 
         $parent_section = $db->query("SELECT `parent` FROM `categories` WHERE `id` = '{$id}';")->fetch_assoc();
-        
-        
 
         if ($parent_section["parent"] != 0) {
             Topic::addCounterCategoriesViewMessages($parent_section["parent"]);
         }
-        
-        //die(var_dump($parent_section));
 
         $db->query("UPDATE `categories` SET `categories_counter_messages` = `categories_counter_messages` + 1 WHERE `id` = '{$id}';");
     }
@@ -167,7 +161,8 @@ class Topic
         $db->query("UPDATE `categories` SET `categories_counter_messages` = `categories_counter_messages` + 1 WHERE `id` = '{$parent}';");
 
         //Темы +1
-        Topic::addCounterCategoriesViewTopics($parent["parent"]);
+        Topic::addCounterCategoriesViewTopics($parent);
+        Topic::addCounterCategoriesViewMessages($parent);
 
         if ($db->query("INSERT INTO `topics` VALUES (null, '{$title}', '{$parent}', '1', '0', '0');")) {
             $tid = $db->insert_id;
