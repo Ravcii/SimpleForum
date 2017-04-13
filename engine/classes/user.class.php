@@ -78,8 +78,6 @@ class User {
     public static function uploadAvatar($uid, $file){
         $img_size = getimagesize($file["tmp_name"]);
         
-        var_dump($file);
-        
         if($file["size"] > 1024 * 1024){
             return "Максимальный размер файла: 1мб.";
         } else if($file["type"] != "image/bmp" &&

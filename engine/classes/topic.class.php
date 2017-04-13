@@ -6,43 +6,53 @@ class Topic
     public static function getTitle($id)
     {
         global $db;
-
         $title = $db->query("SELECT `title` FROM `topics` WHERE `id` = '{$id}';")->fetch_assoc();
-
         return $title["title"];
     }
-
-    public static function getUserMessagesAsArray($id)
-    {
+    
+    public static function getCountOfMessages($id){
         global $db;
-
-        $result = array();
-        $messages = $db->query("SELECT `messages`.`id`, `messages`.`uid`, `messages`.`message`, `messages`.`date`, `users`.`login` FROM `messages` INNER JOIN `users` ON `messages`.`uid` = `users`.`id` WHERE `messages`.`tid` = '{$id}';");
-        while ($row = $messages->fetch_assoc()) {
-            $result[] = $row;
-        }
-
-        $test = count($result);
-
-        return $result;
+        $cm = $db->query("SELECT `counter_messages` FROM `topics` WHERE `id` = '{$id}';")->fetch_assoc();
+        return $cm["counter_messages"];
     }
-
+    
+    public static function getCountOfPages($id){
+        return (int) Topic::getCountOfMessages($id) / MSG_PER_PAGE;
+    }
+    
     public static function getCounterViewTopic($id)
     {
         global $db;
-
         $view_topic = $db->query("SELECT `counter_view` FROM `topics` WHERE `id` = '{$id}';")->fetch_assoc();
         $db->query("UPDATE `topics` SET `counter_view` = `counter_view` + 1 WHERE `id` = '{$id}';");
-
         return $view_topic['counter_view'] + 1;
     }
 
-    public static function getUserMessagesAsHtml($id)
+    public static function getUserMessagesAsArray($id, $page)
+    {
+        if($page > Topic::getCountOfPages($id)){
+            header("Location: /");
+        }
+        //Change for mysql limit
+        $page = ($page - 1) * 10;
+        
+        global $db;
+
+        $result = array();
+        $messages = $db->query("SELECT `messages`.`id`, `messages`.`uid`, `messages`.`message`, `messages`.`date`, `users`.`login` FROM `messages` INNER JOIN `users` ON `messages`.`uid` = `users`.`id` WHERE `messages`.`tid` = '{$id}'LIMIT {$page}, ".MSG_PER_PAGE.";");
+        while ($row = $messages->fetch_assoc()) {
+            $result[] = $row;
+        }
+        
+        return $result;
+    }
+
+    public static function getUserMessagesAsHtml($id, $page)
     {
         global $template;
         $_html = "";
 
-        foreach (Topic::getUserMessagesAsArray($id) as $message) {
+        foreach (Topic::getUserMessagesAsArray($id, $page) as $message) {
             $message_html = $template->getTextFromFile("/topic/user_message.tpl");
             $message_html = str_replace("{message_id}", $message["id"], $message_html);
             $message_html = str_replace("{user_id}", $message["uid"], $message_html);
@@ -51,6 +61,26 @@ class Topic
             $message_html = str_replace("{message_text}", $message["message"], $message_html);
 
             $_html .= $message_html;
+        }
+
+        return $_html;
+    }
+    
+    public static function getPaginationAsHtml($id, $now_page){
+        global $template;
+        $_html = "";
+
+        for($i = 1; $i <= Topic::getCountOfPages($id); $i++) {
+            $page_html = $template->getTextFromFile("/topic/pagenation_button.tpl");
+            $page_html = str_replace("{tid}", $id, $page_html);
+            $page_html = str_replace("{page}", $i, $page_html);
+            if($now_page == $i){
+                $page_html = str_replace("{now_here}", "here", $page_html);
+            } else {
+                $page_html = str_replace("{now_here}", "", $page_html);
+            }
+
+            $_html .= $page_html;
         }
 
         return $_html;
@@ -74,10 +104,9 @@ class Topic
         $uid = $db->real_escape_string($uid);
 
         if ($db->query("INSERT INTO `messages` VALUES (null, '{$uid}', '{$tid}', '{$text}', NOW());")) {
-            //Кол-во сообщений +1
+            //Кол-во сообщений +1 в топике
             $db->query("UPDATE `topics` SET `counter_messages` = `counter_messages` + 1 WHERE id = '{$tid}';");
-            $db->query("UPDATE `categories` SET `categories_counter_messages` = `categories_counter_messages` + 1 WHERE `id` = '{$parent["parent"]}';");
-
+            //В категориях
             Topic::addCounterCategoriesViewMessages($parent["parent"]);
 
             return "Ваше сообщение отправлено!";
@@ -128,10 +157,10 @@ class Topic
         $text = $db->real_escape_string($text);
         $uid = $db->real_escape_string($uid);
 
-        //Кол-во тем +1
-        $db->query("UPDATE `categories` SET `categories_counter_topics` = `categories_counter_topics` + 1 WHERE `id` = '{$parent}';");
+        //Кол-во сообщений +1
         $db->query("UPDATE `categories` SET `categories_counter_messages` = `categories_counter_messages` + 1 WHERE `id` = '{$parent}';");
 
+        //Темы +1
         Topic::addCounterCategoriesViewTopics($parent["parent"]);
 
         if ($db->query("INSERT INTO `topics` VALUES (null, '{$title}', '{$parent}', '1', '0', '0');")) {
