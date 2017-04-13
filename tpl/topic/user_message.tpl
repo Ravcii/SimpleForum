@@ -9,8 +9,8 @@
                 />
             </div>
         </a>
-        <span id="count_messages">Сообщений: 1000</span>
-        <span id="status">Статус: Online</span>
+        <!--span id="count_messages">Сообщений: 1000</span>
+        <span id="status">Статус: Online</span-->
     </div>
     <div class="highlighted">Опубликовано - {message_date}</div>
     <div class="text_messages right">

@@ -45,8 +45,9 @@ switch($page){
     //Страница с темой
 	case "topic":
         $id = $db->real_escape_string($_GET["id"]);
+        $topic_page = (isset($_GET["topic_page"])) ? $db->real_escape_string($_GET["topic_page"]) : 1;
+        
         $topicTitle = Topic::getTitle($id);
-    
 		$template->addTitle($topicTitle);
 
 		Topic::getCounterViewTopic($id);
@@ -64,7 +65,8 @@ switch($page){
         
         $template->replaceString("{topic_id}", $id);
         $template->replaceString("{topic_title}", $topicTitle);
-        $template->replaceString("{user_messages}", Topic::getUserMessagesAsHtml($id));
+        $template->replaceString("{pagination}", Topic::getPaginationAsHtml($id, $topic_page));
+        $template->replaceString("{user_messages}", Topic::getUserMessagesAsHtml($id, $topic_page));
 		break;
         
     //Страница с созданием темы
@@ -161,6 +163,8 @@ $template->replaceString("{header_title}", $template->getTitle());
 $template->replaceString("{ifLogged}", "<?php if(isset(\$_SESSION['auth']) && \$_SESSION['auth']) {  ?>");
 $template->replaceString("{else}", "<?php } else { ?>");
 $template->replaceString("{end}", "<?php } ?>");
+
+$template->replaceString("{this_page}", $_SERVER['REQUEST_URI']);
 
 if(isset($_SESSION["auth"])){
     $template->replacePregString("#\\{user\\[(.*?)\\]\\}#ies", "\$_SESSION['\\1']");
