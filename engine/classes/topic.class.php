@@ -17,7 +17,7 @@ class Topic
     }
     
     public static function getCountOfPages($id){
-        return (int) Topic::getCountOfMessages($id) / MSG_PER_PAGE;
+        return ceil(Topic::getCountOfMessages($id) / MSG_PER_PAGE);
     }
     
     public static function getCounterViewTopic($id)
@@ -31,7 +31,7 @@ class Topic
     public static function getUserMessagesAsArray($id, $page)
     {
         if($page > Topic::getCountOfPages($id)){
-            header("Location: /");
+            header("Location: /topic.id={$id}");
         }
         //Change for mysql limit
         $page = ($page - 1) * 10;
@@ -102,6 +102,8 @@ class Topic
         $text = $db->real_escape_string($text);
         $tid = $db->real_escape_string($tid);
         $uid = $db->real_escape_string($uid);
+        
+        echo $tid;
 
         if ($db->query("INSERT INTO `messages` VALUES (null, '{$uid}', '{$tid}', '{$text}', NOW());")) {
             //Кол-во сообщений +1 в топике
@@ -119,10 +121,14 @@ class Topic
         global $db;
 
         $parent_section = $db->query("SELECT `parent` FROM `categories` WHERE `id` = '{$id}';")->fetch_assoc();
+        
+        
 
-        if ($parent_section["parent"] != NULL) {
-                Topic::addCounterCategoriesViewMessages($parent_section["parent"]);
+        if ($parent_section["parent"] != 0) {
+            Topic::addCounterCategoriesViewMessages($parent_section["parent"]);
         }
+        
+        //die(var_dump($parent_section));
 
         $db->query("UPDATE `categories` SET `categories_counter_messages` = `categories_counter_messages` + 1 WHERE `id` = '{$id}';");
     }
@@ -132,7 +138,7 @@ class Topic
 
         $parent_section = $db->query("SELECT `parent` FROM `categories` WHERE `id` = '{$id}';")->fetch_assoc();
 
-        if ($parent_section["parent"] != NULL) {
+        if ($parent_section["parent"] != 0) {
             Topic::addCounterCategoriesViewTopics($parent_section["parent"]);
         }
 
