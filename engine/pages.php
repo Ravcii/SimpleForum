@@ -82,6 +82,7 @@ switch($page){
 		
 		$template->addFile("header.tpl");
 		$template->addFile("/new_topic.tpl");
+		$template->addFile("footer.tpl");
 
         if(isset($_POST["action"]) && $_POST["action"]){
             $msg = Topic::createTopic($_POST["title"], $_POST["text"], $_SESSION["id"], $pid);
