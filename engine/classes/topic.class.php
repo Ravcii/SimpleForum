@@ -160,10 +160,7 @@ class Topic
         $text = $db->real_escape_string($text);
         $uid = $db->real_escape_string($uid);
 
-        //Кол-во сообщений +1
-        $db->query("UPDATE `categories` SET `categories_counter_messages` = `categories_counter_messages` + 1 WHERE `id` = '{$parent}';");
-
-        //Темы +1
+        //Темы и сообщения +1
         Topic::addCounterCategoriesViewTopics($parent);
         Topic::addCounterCategoriesViewMessages($parent);
 
