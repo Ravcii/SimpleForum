@@ -134,6 +134,10 @@ ul li ul.popout li a{
     color: #fff;
 }
 
+.category .mobile_titles {
+    display: none;
+}
+
 .category .titles th {
     font-weight: 100;
     background: #d66d6b;
@@ -142,6 +146,7 @@ ul li ul.popout li a{
 .category .titles th:first-of-type {
     padding: 10px 15px;
     border-radius: 5px 0 0 5px;
+    max-width: 0;
 }
 
 .category .titles th:last-of-type {
@@ -221,7 +226,6 @@ ul li ul.popout li a{
 .text_messages {
     padding: 10px;
     width: 630px;
-    float: right;
 }
 
 .background_message_user {
@@ -326,7 +330,6 @@ footer p {
     outline: none;
     border: 2px solid;
     border-radius: 1px;
-    transition: 0.2s;
 }
 
 a.new_topic_button:hover {

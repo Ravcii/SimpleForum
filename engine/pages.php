@@ -27,6 +27,13 @@ switch($page){
         $template->addFile("footer.tpl");
 
         $template->replaceString("{current_category_id}", $id);
+        
+        if(Section::getParentId(Section::getParentId($id)) == 0){
+            $template->replaceString("{parentLink}", "/");
+        } else {
+            $template->replaceString("{parentLink}", "/section.id=".Section::getParentId($id));
+        }
+        
         $subCatHtml = Section::getSubCategoriesAsHtml($id);
         if($subCatHtml != ""){
             $template->replaceString("{categories_placer}", $subCatHtml);
@@ -65,6 +72,7 @@ switch($page){
         
         $template->replaceString("{topic_id}", $id);
         $template->replaceString("{topic_title}", $topicTitle);
+        $template->replaceString("{parentId}", Topic::getParentId($id));
         $template->replaceString("{pagination}", Topic::getPaginationAsHtml($id, $topic_page));
         $template->replaceString("{user_messages}", Topic::getUserMessagesAsHtml($id, $topic_page));
 		break;

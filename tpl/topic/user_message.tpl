@@ -11,7 +11,7 @@
         <span id="status">Статус: Online</span-->
     </div>
     <div class="highlighted">Опубликовано - {message_date}</div>
-    <div class="text_messages">
+    <div class="text_messages right">
         {message_text}
     </div>
     <div class="clear"></div>

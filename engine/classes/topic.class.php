@@ -3,14 +3,13 @@
 class Topic
 {
 
-    public static function getTitle($id)
-    {
+    public static function getTitle($id) {
         global $db;
         $title = $db->query("SELECT `title` FROM `topics` WHERE `id` = '{$id}';")->fetch_assoc();
         return $title["title"];
     }
     
-    public static function getCountOfMessages($id){
+    public static function getCountOfMessages($id) {
         global $db;
         $cm = $db->query("SELECT `counter_messages` FROM `topics` WHERE `id` = '{$id}';")->fetch_assoc();
         return $cm["counter_messages"];
@@ -20,16 +19,20 @@ class Topic
         return ceil(Topic::getCountOfMessages($id) / MSG_PER_PAGE);
     }
     
-    public static function getCounterViewTopic($id)
-    {
+    public static function getCounterViewTopic($id) {
         global $db;
         $view_topic = $db->query("SELECT `counter_view` FROM `topics` WHERE `id` = '{$id}';")->fetch_assoc();
         $db->query("UPDATE `topics` SET `counter_view` = `counter_view` + 1 WHERE `id` = '{$id}';");
         return $view_topic['counter_view'] + 1;
     }
+    
+    public static function getParentId($id) {
+        global $db;
+        $parent = $db->query("SELECT `parent` FROM `topics` WHERE `id` = '{$id}';")->fetch_assoc();
+        return $parent['parent'];
+    }
 
-    public static function getUserMessagesAsArray($id, $page)
-    {
+    public static function getUserMessagesAsArray($id, $page) {
         if($page > Topic::getCountOfPages($id)){
             header("Location: /topic.id={$id}");
         }
@@ -47,8 +50,7 @@ class Topic
         return $result;
     }
 
-    public static function getUserMessagesAsHtml($id, $page)
-    {
+    public static function getUserMessagesAsHtml($id, $page) {
         global $template;
         $_html = "";
 
@@ -66,7 +68,7 @@ class Topic
         return $_html;
     }
     
-    public static function getPaginationAsHtml($id, $now_page){
+    public static function getPaginationAsHtml($id, $now_page) {
         global $template;
         $_html = "";
         $pages = Topic::getCountOfPages($id);
@@ -89,8 +91,7 @@ class Topic
         return $_html;
     }
 
-    public static function sendAnswer($tid, $uid, $text)
-    {
+    public static function sendAnswer($tid, $uid, $text) {
         global $db;
 
         if ($text == "") {
@@ -118,7 +119,7 @@ class Topic
         }
     }
 
-    public static function addCounterCategoriesViewMessages($id){
+    public static function addCounterCategoriesViewMessages($id) {
         global $db;
 
         $parent_section = $db->query("SELECT `parent` FROM `categories` WHERE `id` = '{$id}';")->fetch_assoc();
@@ -130,7 +131,7 @@ class Topic
         $db->query("UPDATE `categories` SET `categories_counter_messages` = `categories_counter_messages` + 1 WHERE `id` = '{$id}';");
     }
 
-    public static function addCounterCategoriesViewTopics($id){
+    public static function addCounterCategoriesViewTopics($id) {
         global $db;
 
         $parent_section = $db->query("SELECT `parent` FROM `categories` WHERE `id` = '{$id}';")->fetch_assoc();
@@ -142,8 +143,7 @@ class Topic
         $db->query("UPDATE `categories` SET `categories_counter_topics` = `categories_counter_topics` + 1 WHERE `id` = '{$id}';");
     }
 
-    public static function createTopic($title, $text, $uid, $parent)
-    {
+    public static function createTopic($title, $text, $uid, $parent) {
         global $db;
 
         if ($title == "") {

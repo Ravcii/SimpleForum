@@ -7,9 +7,14 @@ class Section {
         $title = $db->query("SELECT `name` FROM `categories` WHERE `id` = '{$id}';")->fetch_assoc();
         return $title["name"];
     }
+    
+    public static function getParentId($id) {
+        global $db;
+        $parent = $db->query("SELECT `parent` FROM `categories` WHERE `id` = '{$id}';")->fetch_assoc();
+        return $parent['parent'];
+    }
 
-    public static function getSubCategoriesAsArray($parentId)
-    {
+    public static function getSubCategoriesAsArray($parentId) {
         global $db;
 
         $result = array();
@@ -21,8 +26,7 @@ class Section {
         return $result;
     }
 
-    public static function getSubCategoriesAsHtml($parentId)
-    {
+    public static function getSubCategoriesAsHtml($parentId) {
         global $template;
         
         $subCats = Section::getSubCategoriesAsArray($parentId);
@@ -46,8 +50,7 @@ class Section {
         return $returnHtml;
     }
 
-    public static function getTopicsAsArray($parentId)
-    {
+    public static function getTopicsAsArray($parentId) {
         global $db;
 
         $result = array();
@@ -60,7 +63,7 @@ class Section {
         return $result;
     }
 
-    public static function  getLastMessagesUser($id){
+    public static function getLastMessagesUser($id) {
         global $db;
 
         $all_messages = $db->query("SELECT `id`, `uid` FROM `messages` WHERE `tid` = '{$id}';");
@@ -69,8 +72,8 @@ class Section {
             $result[] = $row;
         }
     }
-    public static function getTopicsAsHtml($parentId)
-    {
+    
+    public static function getTopicsAsHtml($parentId) {
         global $template;
 
         $topics = Section::getTopicsAsArray($parentId);
