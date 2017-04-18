@@ -39,9 +39,9 @@ class User {
         } else if(!preg_match("/[0-9a-z_]+@[0-9a-z_^\.-]+\.[a-z]{2,3}/i", $email)) {
             return "E-mail должно быть в формате: josh@doe.com.";
         } else if($db->query("SELECT `login` FROM `users` WHERE `login` = '".$login."'")->num_rows > 0 ){
-            return "Кто-то уже зарегестрирован с логином <b>".$login."</b>.";
+            return "Кто-то уже зарегистрирован с логином <b>".$login."</b>.";
         } else if($db->query("SELECT `email` FROM `users` WHERE `email` = '".$email."'")->num_rows > 0 ) {
-            return "Кто-то уже зарегестрирован с адресом <b>".$email."</b>.";
+            return "Кто-то уже зарегистрирован с адресом <b>".$email."</b>.";
         } else if($pass != $repass){
             return "Пароли не совпадают.";
         }
